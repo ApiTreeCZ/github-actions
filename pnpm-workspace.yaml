@@ -1,0 +1,12 @@
+allowBuilds:
+  unrs-resolver: true
+
+autoInstallPeers: false
+
+enablePrePostScripts: true
+
+engineStrict: true
+
+saveExact: true
+
+strictPeerDependencies: true
