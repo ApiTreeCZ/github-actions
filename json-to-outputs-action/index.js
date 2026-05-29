@@ -8,7 +8,6 @@ async function run() {
       throw new Error('Input "json" is required');
     }
 
-    const data = JSON.parse(json);
     const outputFile = process.env.GITHUB_OUTPUT;
 
     if (!outputFile) {
@@ -19,6 +18,7 @@ async function run() {
     const SUBSTRING_START = 2;
     const SUBSTRING_END = 15;
 
+    const data = JSON.parse(json);
     let outputContent = '';
 
     for (const [key, value] of Object.entries(data)) {
