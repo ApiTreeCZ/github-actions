@@ -4,7 +4,7 @@ Please follow the contribution process outlined below.
 
 ## Contribution Process
 
-We use [GitHub](https://github.com/ApiTreeCZ/toolbox) for version control and issue tracking. Here's a
+We use [GitHub](https://github.com/ApiTreeCZ/github-actions) for version control and issue tracking. Here's a
 step-by-step guide on how to contribute:
 
 ### 1. Create a Feature Branch
@@ -66,5 +66,5 @@ that your code follows the established patterns and conventions described and us
 ## Reporting Issues
 
 If you encounter any issues or have suggestions for improvement, please use
-the [GitHub issue tracker](https://github.com/ApiTreeCZ/toolbox/issues) to report them. Be
+the [GitHub issue tracker](https://github.com/ApiTreeCZ/github-actions/issues) to report them. Be
 as descriptive as possible and follow the issue template to provide the necessary details.

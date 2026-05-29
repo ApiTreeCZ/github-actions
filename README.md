@@ -43,7 +43,7 @@ We provide the following reusable GitHub Actions in this repository:
 ## Versioning
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see
-the [tags on this repository](https://github.com/ApiTreeCZ/toolbox/tags).
+the [tags on this repository](https://github.com/ApiTreeCZ/github-actions/tags).
 
 ## Contributing
 
