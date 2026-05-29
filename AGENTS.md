@@ -1,6 +1,6 @@
 # AGENTS.md
 
-Welcome! This repository contains reusable GitHub Actions for ApiTree projects. It is structured as a monorepo containing multiple composite GitHub Actions.
+This repository contains reusable GitHub Actions for ApiTree projects. It is structured as a monorepo containing multiple composite GitHub Actions.
 
 ## Repository Tech Stack
 
