@@ -3,9 +3,11 @@ import { appendFile } from 'node:fs/promises';
 async function run() {
   try {
     const json = process.env.INPUT_JSON;
+
     if (!json) {
       throw new Error('Input "json" is required');
     }
+
     const data = JSON.parse(json);
     const outputFile = process.env.GITHUB_OUTPUT;
 
