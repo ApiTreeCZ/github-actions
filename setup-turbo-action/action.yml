@@ -1,0 +1,50 @@
+name: Set up Turbo
+description: Set up Turbo cache for CI
+
+inputs:
+  op-service-account-token:
+    description: '1Password service account token with access to the vault(s) containing Turbo secrets'
+    required: true
+
+  dir:
+    description: 'The directory to use for the Turbo cache'
+    default: '.turbo'
+    required: false
+
+  cache-key:
+    description: 'The key to use for the Turbo local cache'
+    default: 'turbo-cache-${{ runner.os }}-${{ runner.arch }}-${{ github.sha }}'
+    required: false
+
+  restore-keys:
+    description: 'The restore keys to use for the Turbo local cache'
+    default: 'turbo-cache-${{ runner.os }}-${{ runner.arch }}-'
+    required: false
+
+runs:
+  using: composite
+  steps:
+    - name: Set up Turbo local cache
+      uses: actions/cache@v5
+      with:
+        path: ${{ inputs.dir }}
+        key: ${{ inputs.cache-key }}
+        restore-keys: ${{ inputs.restore-keys }}
+
+    - name: Load Turbo secrets
+      uses: ApiTreeCZ/github-actions/load-secrets-action@main
+      id: load-secrets
+      with:
+        op-service-account-token: ${{ inputs.op-service-account-token }}
+        export-env: 'true'
+        secrets: |
+          TURBO_API=op://apitree-infra/turbo-remote-cache/TURBO_API
+          TURBO_TOKEN=op://apitree-infra/turbo-remote-cache/TURBO_TOKEN
+          TURBO_REMOTE_CACHE_SIGNATURE_KEY=op://apitree-infra/turbo-remote-cache/TURBO_REMOTE_CACHE_SIGNATURE_KEY
+
+    - name: Derive TURBO_TEAM from repository name
+      shell: bash
+      # language=bash
+      run: |
+        TURBO_TEAM=$(echo "${GITHUB_REPOSITORY}" | cut -d '/' -f2)
+        echo "TURBO_TEAM=$TURBO_TEAM" >>$GITHUB_ENV

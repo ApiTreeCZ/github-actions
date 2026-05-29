@@ -5,9 +5,11 @@
   "license": "UNLICENSED",
   "type": "module",
   "scripts": {
+    "fix": "pnpx concurrently --kill-others-on-fail --prefix-colors auto \"pnpm run format\" \"pnpm run lint:fix\"",
     "format": "prettier --check --write .",
     "postinstall": "pnpx is-ci || husky",
-    "lint": "eslint --cache ."
+    "lint": "eslint --cache .",
+    "lint:fix": "pnpm run lint --fix"
   },
   "devDependencies": {
     "@apitree.cz/eslint-config": "2.0.0",

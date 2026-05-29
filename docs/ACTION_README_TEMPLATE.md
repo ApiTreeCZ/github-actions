@@ -1,4 +1,4 @@
-# ⚙️ Action `[action-name]`
+# ⚙️ `[action-folder-name]`
 
 [A brief but descriptive explanation of what this GitHub Action does, what problems it solves, and when to use it.]
 
@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Run [Action Name]
         uses: ApiTreeCZ/github-actions/[action-folder-name]@main

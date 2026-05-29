@@ -28,7 +28,7 @@ Ask the user for the following details. You can ask directly or suggest a standa
 
 ### 2. Scaffold Action Directory
 
-- **Folder Name**: Construct a kebab-case directory name from the Action Name (e.g., `Setup Node.js` -> `setup-node`).
+- **Folder Name**: Construct a kebab-case directory name from the Action Name (e.g., `Setup Node.js` -> `setup-node-action`).
 - **Path**: Create this directory at the root of the repository: `[folder-name]/`.
 
 ### 3. Generate action.yml

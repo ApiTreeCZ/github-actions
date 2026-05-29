@@ -1,0 +1,72 @@
+name: Load secrets
+description: Loads secrets from 1Password vault(s) allowing to export them as env vars
+
+inputs:
+  secrets:
+    description: 'Secrets references in "KEY=op://..." format, one per line'
+    required: true
+
+  export-env:
+    description: 'Whether to export secrets as environment variables (boolean or multi-line list of specific keys)'
+    required: false
+    default: 'false'
+
+  op-service-account-token:
+    description: '1Password service account token with access to the vault(s)'
+    required: true
+
+  op-env-file:
+    description: 'Path to template .env file for secrets injection'
+    required: false
+
+outputs:
+  secrets:
+    description: 'Exported secrets mapped to their values as a JSON string'
+    value: ${{ toJSON(steps.export-secrets.outputs) }}
+
+runs:
+  using: composite
+  steps:
+    - name: Export secret references to GITHUB_ENV
+      shell: bash
+      # language=bash
+      run: |
+        echo "${{ inputs.secrets }}" >> $GITHUB_ENV
+
+    - name: Load secrets from 1Password
+      id: load-secrets
+      uses: 1password/load-secrets-action@v4
+      env:
+        OP_SERVICE_ACCOUNT_TOKEN: ${{ inputs.op-service-account-token }}
+        OP_ENV_FILE: ${{ inputs.op-env-file }}
+      with:
+        export-env: false
+
+    - name: Export secrets
+      id: export-secrets
+      uses: actions/github-script@v9
+      env:
+        LOADED_SECRETS: ${{ toJSON(steps.load-secrets.outputs) }}
+        EXPORT_ENV: ${{ inputs.export-env }}
+      with:
+        # language=javascript
+        script: |
+          const loadedSecrets = JSON.parse(process.env.LOADED_SECRETS || '{}');
+          const opExportEnv = process.env.EXPORT_ENV || 'false';
+
+          const shouldExportAll = opExportEnv === 'true';
+          const shouldExportNone = opExportEnv === 'false';
+
+          const secretsToExport = (!shouldExportAll && !shouldExportNone)
+            ? opExportEnv.split('\n').map((env) => env.trim()).filter(Boolean)
+            : [];
+
+          for (const [key, value] of Object.entries(loadedSecrets)) {
+            core.setOutput(key, value);
+            
+            if (shouldExportAll || secretsToExport.includes(key)) {
+              core.exportVariable(key, value);
+            } else {
+              core.exportVariable(key, '');
+            }
+          }
