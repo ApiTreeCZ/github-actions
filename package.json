@@ -9,12 +9,14 @@
     "format": "prettier --check --write .",
     "postinstall": "pnpx is-ci || husky",
     "lint": "eslint --cache .",
-    "lint:fix": "pnpm run lint --fix"
+    "lint:fix": "pnpm run lint --fix",
+    "test": "vitest run"
   },
   "devDependencies": {
     "@apitree.cz/eslint-config": "2.0.0",
     "@apitree.cz/lint-staged-config": "1.0.5",
     "@apitree.cz/prettier-config": "1.0.0",
+    "@apitree.cz/vitest-config": "1.0.0",
     "@commitlint/cli": "21.0.2",
     "@commitlint/config-conventional": "21.0.2",
     "@types/node": "24.12.4",
@@ -23,7 +25,8 @@
     "husky-check-email": "0.0.8",
     "lint-staged": "17.0.5",
     "prettier": "3.8.3",
-    "typescript": "6.0.3"
+    "typescript": "6.0.3",
+    "vitest": "4.1.7"
   },
   "packageManager": "pnpm@10.34.1",
   "engines": {
