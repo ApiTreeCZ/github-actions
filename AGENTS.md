@@ -12,10 +12,10 @@ Welcome! This repository contains reusable GitHub Actions for ApiTree projects. 
 
 Each action is placed in its own folder under the repository root (e.g., `[name]-action/`).
 
-- `load-secrets-action/`: Injects/loads secrets from 1Password.
-- `parse-secrets-action/`: Helper to parse JSON secrets into outputs.
-- `setup-node-action/`: Installs Node.js & configures `pnpm` with caching.
-- `setup-turbo-action/`: Configures Turborepo local caching.
+- `json-to-outputs-action/`: Helper to parse a JSON string into individual step outputs.
+- `load-secrets-action/`: Injects and loads secrets from 1Password vaults securely.
+- `setup-node-action/`: Installs Node.js and configures `pnpm` package manager with caching.
+- `setup-turbo-action/`: Configures Turborepo local & remote cache for build optimization in CI.
 - `docs/ACTION_README_TEMPLATE.md`: Template for generating individual action documentation.
 
 ## Custom Agent Skills
@@ -23,14 +23,16 @@ Each action is placed in its own folder under the repository root (e.g., `[name]
 This repository includes custom agent instructions/skills in `.agents/`:
 
 - **[create-action](file:///Users/vitrozsival/projects/apitree/github-actions/.agents/skills/create-action/SKILL.md)**: Use this skill when asked to create/scaffold a new reusable GitHub Action. It walks you through metadata collection, folder creation, and template validation.
+- **[release](file:///Users/vitrozsival/projects/apitree/github-actions/.agents/skills/release/SKILL.md)**: Use this skill when asked to release a new version of the repository. It bumps the version in `package.json` and READMEs, commits, tags, and pushes to remote.
 
 ## Development Workflows
 
-When editing or creating code/config in this repository, always run these commands to ensure style and lint compliance:
+When editing or creating code/config in this repository, always run these commands to ensure style, lint compliance, and functionality:
 
 - **Lint checks**: `pnpm run lint`
 - **Formatting checks**: `pnpm run format`
 - **Auto-fix code/lint issues**: `pnpm run fix`
+- **Run tests**: `pnpm run test`
 
 ## Constraints & Rules
 
