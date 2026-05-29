@@ -2,7 +2,7 @@
   "name": "@apitree.cz/github-actions",
   "private": true,
   "description": "Reusable GitHub Actions for ApiTree projects",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "fix": "pnpx concurrently --kill-others-on-fail --prefix-colors auto \"pnpm run format\" \"pnpm run lint:fix\"",
