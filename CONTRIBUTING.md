@@ -60,7 +60,7 @@ of PRs, and any breaking changes. This is critical for generating accurate chang
 
 ## Code Style
 
-Please adhere to our coding style guidelines, which are controlled by `prettier`. Ensure
+Please adhere to our coding style guidelines, which are controlled by `eslint` and `prettier`. Ensure
 that your code follows the established patterns and conventions described and used in each package.
 
 ## Reporting Issues
