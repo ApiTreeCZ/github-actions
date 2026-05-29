@@ -3,7 +3,7 @@ description: Set up Turbo cache for CI
 
 inputs:
   op-service-account-token:
-    description: '1Password service account token with access to the vault(s) containing Turbo secrets'
+    description: '1Password service account token with access to the vault containing Turbo secrets'
     required: true
 
   dir:

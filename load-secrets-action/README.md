@@ -74,7 +74,7 @@ By default, `export-env` is `'false'`. If you need to export secrets directly to
 
 | Input                      | Description                                                                                                                      | Required |  Default  |
 | :------------------------- | :------------------------------------------------------------------------------------------------------------------------------- | :------: | :-------: |
-| `secrets`                  | Secrets references in `KEY=VALUE` format, one per line                                                                           | **Yes**  |     -     |
+| `secrets`                  | Secrets references in `KEY=op://...` format, one per line                                                                        | **Yes**  |     -     |
 | `export-env`               | Whether to export secrets as environment variables. Can be `'true'`, `'false'`, or a multi-line list of specific keys to export. |    No    | `'false'` |
 | `op-service-account-token` | 1Password service account token with access to the vault(s)                                                                      | **Yes**  |     -     |
 | `op-env-file`              | Path to template `.env` file for secrets injection                                                                               |    No    |     -     |

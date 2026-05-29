@@ -8,7 +8,7 @@ Parses a JSON secrets string and dynamically exposes each key-value pair as indi
 
 ```yaml
 - name: Parse Secrets
-  id: parsed-secrets
+  id: parse-secrets
   uses: ApiTreeCZ/github-actions/parse-secrets-action@main
   with:
     # Required inputs
@@ -37,15 +37,15 @@ jobs:
             API_KEY=op://apitree-project/production/API_KEY
 
       - name: Parse Secrets to Outputs
-        id: parsed
+        id: parse-secrets
         uses: ApiTreeCZ/github-actions/parse-secrets-action@main
         with:
           json: ${{ steps.load-secrets.outputs.secrets }}
 
       - name: Use Secrets
         run: |
-          echo "API Key is ${{ steps.parsed.outputs.API_KEY }}"
-          echo "DB URI is ${{ steps.parsed.outputs.DATABASE_URI }}"
+          echo "API Key is ${{ steps.parse-secrets.outputs.API_KEY }}"
+          echo "DB URI is ${{ steps.parse-secrets.outputs.DATABASE_URI }}"
 ```
 
 ## 📥 Inputs
@@ -56,7 +56,7 @@ jobs:
 
 ## 📤 Outputs
 
-Exposes outputs dynamically. Each key parsed from the input JSON will be registered as an individual output (e.g. `${{ steps.parsed.outputs.KEY }}`).
+Exposes outputs dynamically. Each key parsed from the input JSON will be registered as an individual output (e.g. `${{ steps.parse-secrets.outputs.KEY }}`).
 
 ## 🛠️ Details
 

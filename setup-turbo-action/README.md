@@ -11,8 +11,7 @@ Set up Turbo cache for CI. This action configures local cache retrieval and stor
   uses: ApiTreeCZ/github-actions/setup-turbo-action@main
   with:
     # Required inputs
-    token: ${{ secrets.TURBO_TOKEN }}
-    signature-key: ${{ secrets.TURBO_SIGNATURE_KEY }}
+    op-service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
 
     # Optional inputs (uncomment if needed)
     # dir: '.turbo'
@@ -35,19 +34,17 @@ jobs:
       - name: Set up Turbo
         uses: ApiTreeCZ/github-actions/setup-turbo-action@main
         with:
-          token: ${{ secrets.TURBO_TOKEN }}
-          signature-key: ${{ secrets.TURBO_SIGNATURE_KEY }}
+          op-service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
 ```
 
 ## 📥 Inputs
 
-| Input           | Description                                                                   | Required |                                Default                                |
-| :-------------- | :---------------------------------------------------------------------------- | :------: | :-------------------------------------------------------------------: |
-| `token`         | The token to use for the Turbo remote cache server authentication             | **Yes**  |                                   -                                   |
-| `signature-key` | The signature key to verify the integrity of the Turbo remote cache artifacts | **Yes**  |                                   -                                   |
-| `dir`           | The directory to use for the Turbo cache                                      |    No    |                              `'.turbo'`                               |
-| `cache-key`     | The key to use for the Turbo local cache                                      |    No    | `'turbo-cache-${{ runner.os }}-${{ runner.arch }}-${{ github.sha }}'` |
-| `restore-keys`  | The restore keys to use for the Turbo local cache                             |    No    |         `'turbo-cache-${{ runner.os }}-${{ runner.arch }}-'`          |
+| Input                      | Description                                                                       | Required |                                Default                                |
+| :------------------------- | :-------------------------------------------------------------------------------- | :------: | :-------------------------------------------------------------------: |
+| `op-service-account-token` | 1Password service account token with access to the vault containing Turbo secrets | **Yes**  |                                   -                                   |
+| `dir`                      | The directory to use for the Turbo cache                                          |    No    |                              `'.turbo'`                               |
+| `cache-key`                | The key to use for the Turbo local cache                                          |    No    | `'turbo-cache-${{ runner.os }}-${{ runner.arch }}-${{ github.sha }}'` |
+| `restore-keys`             | The restore keys to use for the Turbo local cache                                 |    No    |         `'turbo-cache-${{ runner.os }}-${{ runner.arch }}-'`          |
 
 ## 📤 Outputs
 
