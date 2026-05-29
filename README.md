@@ -29,12 +29,12 @@ pnpm install
 
 We provide the following reusable GitHub Actions in this repository:
 
-| Action                                           | Description                                                          |
-| :----------------------------------------------- | :------------------------------------------------------------------- |
-| [`load-secrets-action`](./load-secrets-action)   | Injects and loads secrets from 1Password vaults securely.            |
-| [`parse-secrets-action`](./parse-secrets-action) | Helper to parse a JSON secrets string into individual step outputs.  |
-| [`setup-node-action`](./setup-node-action)       | Installs Node.js and configures `pnpm` package manager with caching. |
-| [`setup-turbo-action`](./setup-turbo-action)     | Configures Turborepo local caching for build optimization in CI.     |
+| Action                                           | Description                                                             |
+| :----------------------------------------------- | :---------------------------------------------------------------------- |
+| [`load-secrets-action`](./load-secrets-action)   | Injects and loads secrets from 1Password vaults securely.               |
+| [`parse-secrets-action`](./parse-secrets-action) | Helper to parse a JSON secrets string into individual step outputs.     |
+| [`setup-node-action`](./setup-node-action)       | Installs Node.js and configures `pnpm` package manager with caching.    |
+| [`setup-turbo-action`](./setup-turbo-action)     | Configures Turborepo local & remote cache for build optimization in CI. |
 
 ## Authors
 
