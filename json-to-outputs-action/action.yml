@@ -1,0 +1,11 @@
+name: JSON to outputs
+description: Parses a JSON string and exposes each key-value pair as an output variable
+
+inputs:
+  json:
+    description: 'JSON string to parse'
+    required: true
+
+runs:
+  using: 'node24'
+  main: 'index.js'

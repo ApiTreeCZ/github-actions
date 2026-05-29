@@ -42,9 +42,9 @@ jobs:
             DATABASE_URI=op://apitree-project/production/DATABASE_URI
             API_KEY=op://apitree-project/production/API_KEY
 
-      - name: Parse Secrets to Outputs
+      - name: Parse Secrets JSON to Outputs
         id: parse-secrets
-        uses: ApiTreeCZ/github-actions/parse-secrets-action@main
+        uses: ApiTreeCZ/github-actions/json-to-outputs-action@main
         with:
           json: ${{ steps.load-secrets.outputs.secrets }}
 

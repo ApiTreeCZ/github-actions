@@ -1,23 +1,23 @@
-# ⚙️ `parse-secrets-action`
+# ⚙️ `json-to-outputs-action`
 
-Parses a JSON secrets string and dynamically exposes each key-value pair as individual output variables on the step.
+Parses a JSON string and dynamically exposes each key-value pair as individual output variables on the step.
 
 ## 🚀 Usage
 
 ### Step Snippet
 
 ```yaml
-- name: Parse Secrets
-  id: parse-secrets
-  uses: ApiTreeCZ/github-actions/parse-secrets-action@main
+- name: Parse JSON to Outputs
+  id: parse-json
+  uses: ApiTreeCZ/github-actions/json-to-outputs-action@main
   with:
     # Required inputs
-    json: ${{ steps.load-secrets.outputs.secrets }}
+    json: ${{ steps.some-step.outputs.some-json }}
 ```
 
 ### Job Example
 
-Here is how you integrate this action into a job:
+Here is how you integrate this action into a job to parse 1Password secrets JSON:
 
 ```yaml
 jobs:
@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
       - name: Load Secrets
         id: load-secrets
@@ -36,9 +36,9 @@ jobs:
             DATABASE_URI=op://apitree-project/production/DATABASE_URI
             API_KEY=op://apitree-project/production/API_KEY
 
-      - name: Parse Secrets to Outputs
+      - name: Parse Secrets JSON to Outputs
         id: parse-secrets
-        uses: ApiTreeCZ/github-actions/parse-secrets-action@main
+        uses: ApiTreeCZ/github-actions/json-to-outputs-action@main
         with:
           json: ${{ steps.load-secrets.outputs.secrets }}
 
@@ -50,13 +50,13 @@ jobs:
 
 ## 📥 Inputs
 
-| Input  | Description            | Required | Default |
-| :----- | :--------------------- | :------: | :-----: |
-| `json` | JSON string of secrets | **Yes**  |    -    |
+| Input  | Description          | Required | Default |
+| :----- | :------------------- | :------: | :-----: |
+| `json` | JSON string to parse | **Yes**  |    -    |
 
 ## 📤 Outputs
 
-Exposes outputs dynamically. Each key parsed from the input JSON will be registered as an individual output (e.g. `${{ steps.parse-secrets.outputs.KEY }}`).
+Exposes outputs dynamically. Each key parsed from the input JSON will be registered as an individual output (e.g. `${{ steps.parse-json.outputs.KEY }}`).
 
 ## 🛠️ Details
 
