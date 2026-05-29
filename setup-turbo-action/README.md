@@ -8,7 +8,7 @@ Set up Turbo cache for CI. This action configures local cache retrieval and stor
 
 ```yaml
 - name: Set up Turbo
-  uses: ApiTreeCZ/github-actions/setup-turbo-action@main
+  uses: ApiTreeCZ/github-actions/setup-turbo-action@v0.1.0
   with:
     # Required inputs
     op-service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
@@ -32,7 +32,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Set up Turbo
-        uses: ApiTreeCZ/github-actions/setup-turbo-action@main
+        uses: ApiTreeCZ/github-actions/setup-turbo-action@v0.1.0
         with:
           op-service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
 ```

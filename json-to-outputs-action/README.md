@@ -9,7 +9,7 @@ Parses a JSON string and dynamically exposes each key-value pair as individual o
 ```yaml
 - name: Parse JSON to Outputs
   id: parse-json
-  uses: ApiTreeCZ/github-actions/json-to-outputs-action@main
+  uses: ApiTreeCZ/github-actions/json-to-outputs-action@v0.1.0
   with:
     # Required inputs
     json: ${{ steps.some-step.outputs.some-json }}
@@ -29,7 +29,7 @@ jobs:
 
       - name: Load Secrets
         id: load-secrets
-        uses: ApiTreeCZ/github-actions/load-secrets-action@main
+        uses: ApiTreeCZ/github-actions/load-secrets-action@v0.1.0
         with:
           op-service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
           secrets: |
@@ -38,7 +38,7 @@ jobs:
 
       - name: Parse Secrets JSON to Outputs
         id: parse-secrets
-        uses: ApiTreeCZ/github-actions/json-to-outputs-action@main
+        uses: ApiTreeCZ/github-actions/json-to-outputs-action@v0.1.0
         with:
           json: ${{ steps.load-secrets.outputs.secrets }}
 
