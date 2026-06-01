@@ -1,0 +1,23 @@
+name: Check unreleased Changesets
+description: Detects if there are any unreleased Changesets in the repository
+
+outputs:
+  result:
+    description: Indicates whether there are any unreleased Changesets
+    value: ${{ steps.check-unreleased-changesets.outputs.result }}
+
+runs:
+  using: composite
+  steps:
+    - name: Check unreleased Changesets
+      id: check-unreleased-changesets
+      shell: bash
+      # language=bash
+      run: |
+        if find "${{ github.workspace }}/.changeset" -type f -name '*.md' ! -name 'README.md' | grep -q .; then
+          echo "Unreleased Changesets found."
+          echo "result=true" >> $GITHUB_OUTPUT
+        else
+          echo "No unreleased Changesets found."
+          echo "result=false" >> $GITHUB_OUTPUT
+        fi
