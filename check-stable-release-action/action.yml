@@ -1,0 +1,34 @@
+name: Check stable release
+description: Checks whether the triggering workflow is a stable release
+
+inputs:
+  commit-message:
+    description: 'Exact release commit message used for detection'
+    required: false
+    default: 'chore(main): release'
+
+  commit-author:
+    description: 'Exact username of the commit author used for detection'
+    required: false
+    default: 'github-actions[bot]'
+
+outputs:
+  result:
+    description: Indicates whether the workflow is a stable release or not
+    value: ${{ steps.check-stable-release.outputs.result }}
+
+runs:
+  using: composite
+  steps:
+    - id: check-stable-release
+      shell: bash
+      # language=bash
+      run: |
+        RESULT=${{ github.ref_name == 'main' && github.event_name == 'push' && github.event.head_commit.message == inputs.commit-message && github.event.head_commit.author.username == inputs.commit-author }}
+        echo "result=$RESULT" >> $GITHUB_OUTPUT
+
+        if [ "$RESULT" == "true" ]; then
+          echo "Release commit detected. This is a stable release."
+        else
+          echo "Release commit not detected."
+        fi
