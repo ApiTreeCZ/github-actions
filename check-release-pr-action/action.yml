@@ -1,0 +1,39 @@
+name: Check release PR
+description: Checks whether the workflow was triggered by a release PR
+
+inputs:
+  branch-name:
+    description: Name or pattern matching the release PR branch
+    required: false
+    default: 'release/main'
+
+outputs:
+  result:
+    description: Indicates whether the workflow was triggered by a release PR
+    value: ${{ steps.check-release-pr.outputs.result }}
+
+runs:
+  using: composite
+  steps:
+    - name: Check release PR
+      id: check-release-pr
+      shell: bash
+      # language=bash
+      run: |
+        RESULT=false
+
+        if [ "${{ github.event_name }}" = "pull_request" ] || [ "${{ github.event_name }}" = "pull_request_target" ]; then
+          BRANCH_NAME="${{ github.head_ref }}"
+          PATTERN="${{ inputs.branch-name }}"
+
+          if [[ "$BRANCH_NAME" == $PATTERN ]]; then
+            RESULT=true
+            echo "Release PR detected: $BRANCH_NAME matches pattern $PATTERN"
+          else
+            echo "Not a release PR: $BRANCH_NAME does not match pattern $PATTERN"
+          fi
+        else
+          echo "Not a release PR: event is ${{ github.event_name }}"
+        fi
+
+        echo "result=$RESULT" >>$GITHUB_OUTPUT
