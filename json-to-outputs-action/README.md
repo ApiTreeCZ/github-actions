@@ -27,7 +27,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Load Secrets
+      - name: Load secrets
         id: load-secrets
         uses: ApiTreeCZ/github-actions/load-secrets-action@v0.1.0
         with:
@@ -36,13 +36,13 @@ jobs:
             DATABASE_URI=op://apitree-project/production/DATABASE_URI
             API_KEY=op://apitree-project/production/API_KEY
 
-      - name: Parse Secrets JSON to Outputs
+      - name: Parse secrets JSON to outputs
         id: parse-secrets
         uses: ApiTreeCZ/github-actions/json-to-outputs-action@v0.1.0
         with:
           json: ${{ steps.load-secrets.outputs.secrets }}
 
-      - name: Use Secrets
+      - name: Use secrets
         run: |
           echo "API Key is ${{ steps.parse-secrets.outputs.API_KEY }}"
           echo "DB URI is ${{ steps.parse-secrets.outputs.DATABASE_URI }}"

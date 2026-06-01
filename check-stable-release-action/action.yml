@@ -10,7 +10,7 @@ inputs:
   commit-author:
     description: 'Exact username of the commit author used for detection'
     required: false
-    default: 'github-actions[bot]'
+    default: 'apitree-github-actions[bot]'
 
 outputs:
   result:
