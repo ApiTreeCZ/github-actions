@@ -54,8 +54,7 @@ outputs:
 runs:
   using: composite
   steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+    - name: [Action Name]
       # Placeholder step - user will replace this with their actual steps
 ```
 
