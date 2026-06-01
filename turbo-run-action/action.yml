@@ -1,0 +1,27 @@
+name: Turbo Run
+description: Run Turbo task with controlled concurrency and no telemetry
+
+inputs:
+  task:
+    description: 'The Turbo task to run'
+    required: true
+
+  concurrency:
+    description: 'Controls number of Turbo tasks running in parallel'
+    required: false
+    default: '10'
+
+  runner:
+    description: 'Script to use for invoking turbo run tasks'
+    required: false
+    default: 'pnpm turbo run'
+
+runs:
+  using: composite
+  steps:
+    - name: Run Turbo task
+      shell: bash
+      env:
+        TURBO_CONCURRENCY: ${{ inputs.concurrency }}
+        TURBO_TELEMETRY_DISABLED: 1
+      run: ${{ inputs.runner }} ${{ inputs.task }}
