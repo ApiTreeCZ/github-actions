@@ -15,8 +15,8 @@ importers:
         specifier: 1.0.5
         version: 1.0.5(lint-staged@17.0.7)
       '@apitree.cz/prettier-config':
-        specifier: 1.0.0
-        version: 1.0.0(prettier@3.8.3)
+        specifier: 1.0.1
+        version: 1.0.1(prettier@3.8.3)
       '@apitree.cz/vitest-config':
         specifier: 1.0.0
         version: 1.0.0(@types/node@24.12.4)(jiti@2.6.1)(vitest@4.1.8(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.9.0))(yaml@2.9.0)
@@ -67,8 +67,8 @@ packages:
       lint-staged:
         optional: true
 
-  '@apitree.cz/prettier-config@1.0.0':
-    resolution: {integrity: sha512-D6VMFtRdOM9k+GHNm9d9nEywH0kYFqD1IdncsXSSy7VGcul0CT9UT3KI3a7O2aocB5l0FWdQnmRN2VNJbgfdkQ==}
+  '@apitree.cz/prettier-config@1.0.1':
+    resolution: {integrity: sha512-hEO1d6lQUTgGakbJytZybwcHbz1zFP38mXbrLEx/NNwlI718GxfhVxNHxro8qLiQYNovaam1bydTgmfjiRvAUA==}
     peerDependencies:
       prettier: ^3.4.2
 
@@ -2280,7 +2280,7 @@ snapshots:
     optionalDependencies:
       lint-staged: 17.0.7
 
-  '@apitree.cz/prettier-config@1.0.0(prettier@3.8.3)':
+  '@apitree.cz/prettier-config@1.0.1(prettier@3.8.3)':
     dependencies:
       prettier: 3.8.3
       prettier-plugin-packagejson: 3.0.2(prettier@3.8.3)
