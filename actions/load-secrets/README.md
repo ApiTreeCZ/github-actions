@@ -8,7 +8,7 @@ Exports and injects secrets from 1Password vault(s) securely using a 1Password S
 
 ```yaml
 - name: Load Secrets from 1Password
-  uses: ApiTreeCZ/github-actions/actions/load-secrets@v0.2.0
+  uses: ApiTreeCZ/github-actions/actions/load-secrets@v0.3.0
   with:
     # Required inputs
     op-service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
@@ -35,7 +35,7 @@ jobs:
 
       - name: Load secrets
         id: load-secrets
-        uses: ApiTreeCZ/github-actions/actions/load-secrets@v0.2.0
+        uses: ApiTreeCZ/github-actions/actions/load-secrets@v0.3.0
         with:
           op-service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
           secrets: |
@@ -44,7 +44,7 @@ jobs:
 
       - name: Parse secrets JSON to outputs
         id: parse-secrets
-        uses: ApiTreeCZ/github-actions/actions/json-to-outputs@v0.2.0
+        uses: ApiTreeCZ/github-actions/actions/json-to-outputs@v0.3.0
         with:
           json: ${{ steps.load-secrets.outputs.secrets }}
 
