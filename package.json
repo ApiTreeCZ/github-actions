@@ -27,7 +27,7 @@
     "lint-staged": "17.0.6",
     "prettier": "3.8.3",
     "typescript": "6.0.3",
-    "vitest": "4.1.7"
+    "vitest": "4.1.8"
   },
   "packageManager": "pnpm@10.34.1",
   "engines": {
