@@ -49,7 +49,7 @@ runs:
   steps:
     - name: Set up Git
       id: setup-git
-      uses: ./.github/actions/setup-git
+      uses: ApiTreeCZ/github-actions/.github/actions/setup-git@main
       with:
         op-service-account-token: ${{ inputs.op-service-account-token }}
         permission-contents: 'write'
