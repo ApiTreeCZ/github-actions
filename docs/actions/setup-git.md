@@ -15,6 +15,7 @@ Set up Git CLI for a bot user with a short-lived token via ApiTree GitHub Action
 
     # Optional inputs (uncomment if needed)
     # permission-contents: 'write'
+    # permission-pull-requests: 'write'
 ```
 
 ### Job Example
@@ -51,6 +52,7 @@ jobs:
 | :------------------------- | :----------------------------------------------------------------------------------------------------- | :------: | :-------: |
 | `op-service-account-token` | 1Password service account token with access to the vault containing ApiTree GitHub Actions app secrets | **Yes**  |     -     |
 | `permission-contents`      | The permission level for contents (repository) scope of the token (`read` or `write`)                  |    No    | `'write'` |
+| `permission-pull-requests` | The permission level for pull requests (repository) scope of the token (`read` or `write`)             |    No    | `'write'` |
 
 ## 📤 Outputs
 

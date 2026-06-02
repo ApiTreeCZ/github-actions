@@ -16,6 +16,7 @@ This action automatically configures Git using [setup-git](./setup-git.md) (auth
     op-service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
 
     # Optional inputs (uncomment if needed)
+    # before-script: ''
     # changeset-bin: 'pnpx @changesets/cli'
     # title: 'chore(main): release'
     # branch: 'release/main'
@@ -53,6 +54,7 @@ jobs:
 | Input                      | Description                                                           | Required |         Default          |
 | :------------------------- | :-------------------------------------------------------------------- | :------: | :----------------------: |
 | `op-service-account-token` | 1Password service account token with access to GitHub Actions secrets | **Yes**  |            -             |
+| `before-script`            | The command to run before creating the release PR                     |    No    |           `''`           |
 | `changeset-bin`            | The command to run the Changesets CLI                                 |    No    | `'pnpx @changesets/cli'` |
 | `title`                    | The title of the release PR                                           |    No    | `'chore(main): release'` |
 | `branch`                   | The branch name for the release PR                                    |    No    |     `'release/main'`     |
@@ -73,12 +75,15 @@ jobs:
 - **Runs on**: `ubuntu-latest`, `macos-latest` (does not currently support Windows runners due to dependencies)
 - **Dependencies**:
   - [setup-git](./setup-git.md)
+  - [setup-project](./setup-project.md)
   - [collect-release-info](./collect-release-info.md)
   - [actions/checkout](https://github.com/actions/checkout)
   - [peter-evans/create-pull-request](https://github.com/peter-evans/create-pull-request)
 - **Under the hood**:
   - Configures global Git configurations using [setup-git](./setup-git.md).
   - Checks out the repository with the generated token.
-  - Generates a release with `changeset version` command.
+  - Sets up the project using [setup-project](./setup-project.md).
+  - Runs the script specified in `before-script` if provided.
+  - Generates a release with `changeset version` command (`${{ inputs.changeset-bin }} version`).
   - Collects release information using [collect-release-info](./collect-release-info.md).
   - Uses `peter-evans/create-pull-request` to create or update a release branch and open the release PR.

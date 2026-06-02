@@ -22,6 +22,7 @@ This composite action checks out the repository, sets up the Node.js project usi
     op-service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
 
     # Optional inputs (uncomment if needed)
+    # before-script: ''
     # build-script: 'pnpm run build'
     # changeset-bin: 'pnpx @changesets/cli'
     # dist-tag: 'next'
@@ -50,6 +51,7 @@ jobs:
 | Input                      | Description                                                           | Required |         Default          |
 | :------------------------- | :-------------------------------------------------------------------- | :------: | :----------------------: |
 | `op-service-account-token` | 1Password service account token with access to GitHub Actions secrets | **Yes**  |            -             |
+| `before-script`            | The command to run before creating the snapshot release               |    No    |           `''`           |
 | `build-script`             | The command to run the build script                                   |    No    |    `'pnpm run build'`    |
 | `changeset-bin`            | The command to run the Changesets CLI                                 |    No    | `'pnpx @changesets/cli'` |
 | `dist-tag`                 | The dist tag to publish the snapshot release under                    |    No    |         `'next'`         |
@@ -69,6 +71,7 @@ _This action does not define any outputs._
 - **Under the hood**:
   - Checks out the repository without credentials.
   - Sets up the Node.js project using [setup-project](./setup-project.md).
+  - Runs the script specified in `before-script` if provided.
   - Versionizes the codebase using Changeset snapshot command (`${{ inputs.changeset-bin }} version --snapshot ${{ inputs.dist-tag }}`).
   - Runs the build script (`${{ inputs.build-script }}`).
   - Publishes to the package registry (`${{ inputs.changeset-bin }} publish --tag ${{ inputs.dist-tag }} --no-git-tag`) if `publish-packages` is set to `"true"`.
