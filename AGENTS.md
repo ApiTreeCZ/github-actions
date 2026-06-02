@@ -12,6 +12,7 @@ This repository contains reusable GitHub Actions for ApiTree projects. It is str
 
 Each action is placed in its own folder under the repository root (e.g., `[name]-action/`).
 
+- `collect-release-info-action/`: Collects release information from the Changesets versioning process.
 - `json-to-outputs-action/`: Helper to parse a JSON string into individual step outputs.
 - `load-secrets-action/`: Injects and loads secrets from 1Password vaults securely.
 - `setup-node-action/`: Installs Node.js and configures `pnpm` package manager with caching.
@@ -22,8 +23,8 @@ Each action is placed in its own folder under the repository root (e.g., `[name]
 
 This repository includes custom agent instructions/skills in `.agents/`:
 
-- **[create-action](file:///Users/vitrozsival/projects/apitree/github-actions/.agents/skills/create-action/SKILL.md)**: Use this skill when asked to create/scaffold a new reusable GitHub Action. It walks you through metadata collection, folder creation, and template validation.
-- **[release](file:///Users/vitrozsival/projects/apitree/github-actions/.agents/skills/release/SKILL.md)**: Use this skill when asked to release a new version of the repository. It bumps the version in `package.json` and READMEs, commits, tags, and pushes to remote.
+- **[create-action](./.agents/skills/create-action/SKILL.md)**: Use this skill when asked to create/scaffold a new reusable GitHub Action. It walks you through metadata collection, folder creation, and template validation.
+- **[release](./.agents/skills/release/SKILL.md)**: Use this skill when asked to release a new version of the repository. It bumps the version in `package.json` and READMEs, commits, tags, and pushes to remote.
 
 ## Development Workflows
 
@@ -39,3 +40,4 @@ When editing or creating code/config in this repository, always run these comman
 1. **GitHub Actions Format**: All actions should be composite actions unless explicitly instructed otherwise.
 2. **Workflow Snippets**: In action `README.md` files, do NOT include `name:` or `on:` top-level triggers in example code snippets. Focus purely on job/step context.
 3. **Commit Messages**: Follow Conventional Commits format (`type(scope): message`) and document changes using Changesets.
+4. **No Absolute Paths**: Never use absolute file paths (e.g., `file:///Users/...`) in documentation. Always use relative repository paths (e.g., `./[action-name]`, `../[action-name]`).

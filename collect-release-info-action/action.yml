@@ -1,0 +1,6 @@
+name: Collect release info
+description: Collects release information from the Changesets versioning process
+
+runs:
+  using: node24
+  main: 'index.js'

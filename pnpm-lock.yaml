@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       '@apitree.cz/eslint-config':
-        specifier: 2.0.0
-        version: 2.0.0(@typescript-eslint/eslint-plugin@8.60.0(@typescript-eslint/parser@8.60.0(eslint@9.39.4(jiti@2.6.1))(typescript@6.0.3))(eslint@9.39.4(jiti@2.6.1))(typescript@6.0.3))(eslint@9.39.4(jiti@2.6.1))(typescript@6.0.3)(vitest@4.1.7(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.9.0))
+        specifier: 2.1.0
+        version: 2.1.0(@typescript-eslint/eslint-plugin@8.60.0(@typescript-eslint/parser@8.60.0(eslint@9.39.4(jiti@2.6.1))(typescript@6.0.3))(eslint@9.39.4(jiti@2.6.1))(typescript@6.0.3))(eslint@9.39.4(jiti@2.6.1))(typescript@6.0.3)(vitest@4.1.7(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.9.0))
       '@apitree.cz/lint-staged-config':
         specifier: 1.0.5
         version: 1.0.5(lint-staged@17.0.6)
@@ -53,8 +53,8 @@ importers:
 
 packages:
 
-  '@apitree.cz/eslint-config@2.0.0':
-    resolution: {integrity: sha512-rlESBEZvD2VA8Xt2ICPUUpNBjlxMZrr67/lkaRmdE9QrZMtdUr1xI+f6QroCaqho4oeEQcEf57thePpfhfsuaA==}
+  '@apitree.cz/eslint-config@2.1.0':
+    resolution: {integrity: sha512-OtdYvuwD7HZ84GqQDocf2gJP7RxA8PB1mqQ0MTgNabjNbs4NWbStU9Pd9H0ctfJFaIecHHTfgCkbI36acbw/hg==}
     peerDependencies:
       eslint: ^9.39.0
       typescript: ^5.9.3 || ^6.0.2
@@ -2249,7 +2249,7 @@ packages:
 
 snapshots:
 
-  '@apitree.cz/eslint-config@2.0.0(@typescript-eslint/eslint-plugin@8.60.0(@typescript-eslint/parser@8.60.0(eslint@9.39.4(jiti@2.6.1))(typescript@6.0.3))(eslint@9.39.4(jiti@2.6.1))(typescript@6.0.3))(eslint@9.39.4(jiti@2.6.1))(typescript@6.0.3)(vitest@4.1.7(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.9.0))':
+  '@apitree.cz/eslint-config@2.1.0(@typescript-eslint/eslint-plugin@8.60.0(@typescript-eslint/parser@8.60.0(eslint@9.39.4(jiti@2.6.1))(typescript@6.0.3))(eslint@9.39.4(jiti@2.6.1))(typescript@6.0.3))(eslint@9.39.4(jiti@2.6.1))(typescript@6.0.3)(vitest@4.1.7(@types/node@24.12.4)(jiti@2.6.1)(yaml@2.9.0))':
     dependencies:
       '@eslint/core': 1.2.1
       '@eslint/eslintrc': 3.3.5
