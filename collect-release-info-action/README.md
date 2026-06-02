@@ -9,7 +9,7 @@ Collects release information from the Changesets versioning process. It parses m
 ```yaml
 - name: Collect Release Info
   id: release-info
-  uses: ApiTreeCZ/github-actions/collect-release-info-action@v0.1.0
+  uses: ApiTreeCZ/github-actions/collect-release-info-action@v0.2.0
 ```
 
 ### Job Example
@@ -28,7 +28,7 @@ jobs:
 
       - name: Collect Release Info
         id: release-info
-        uses: ApiTreeCZ/github-actions/collect-release-info-action@v0.1.0
+        uses: ApiTreeCZ/github-actions/collect-release-info-action@v0.2.0
 
       - name: Create Release PR
         uses: peter-evans/create-pull-request@v6
