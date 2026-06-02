@@ -13,7 +13,7 @@ This composite action automatically configures Git using [setup-git](./setup-git
 
 ```yaml
 - name: Create Release Tags
-  uses: ApiTreeCZ/github-actions/.github/actions/create-release-tags@main
+  uses: ApiTreeCZ/github-actions/.github/actions/create-release-tags@v0.4.0
   with:
     # Required inputs
     op-service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
@@ -32,7 +32,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Create Release Tags
-        uses: ApiTreeCZ/github-actions/.github/actions/create-release-tags@main
+        uses: ApiTreeCZ/github-actions/.github/actions/create-release-tags@v0.4.0
         with:
           op-service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
 ```

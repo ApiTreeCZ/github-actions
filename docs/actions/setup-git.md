@@ -8,7 +8,7 @@ Set up Git CLI for a bot user with a short-lived token via ApiTree GitHub Action
 
 ```yaml
 - name: Set up Git
-  uses: ApiTreeCZ/github-actions/.github/actions/setup-git@main
+  uses: ApiTreeCZ/github-actions/.github/actions/setup-git@v0.4.0
   with:
     # Required inputs
     op-service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
@@ -28,7 +28,7 @@ jobs:
     steps:
       - name: Set up Git
         id: setup-git
-        uses: ApiTreeCZ/github-actions/.github/actions/setup-git@main
+        uses: ApiTreeCZ/github-actions/.github/actions/setup-git@v0.4.0
         with:
           op-service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
           permission-contents: 'write' # Optional, defaults to 'write'

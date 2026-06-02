@@ -8,7 +8,7 @@ Checks whether the triggering workflow is a stable release.
 
 ```yaml
 - name: Check stable release
-  uses: ApiTreeCZ/github-actions/.github/actions/check-stable-release@main
+  uses: ApiTreeCZ/github-actions/.github/actions/check-stable-release@v0.4.0
   with:
     # Optional inputs (uncomment if needed)
     # commit-message: 'chore(main): release'
@@ -28,7 +28,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Check stable release
-        uses: ApiTreeCZ/github-actions/.github/actions/check-stable-release@main
+        uses: ApiTreeCZ/github-actions/.github/actions/check-stable-release@v0.4.0
 ```
 
 ## 📥 Inputs
