@@ -1,0 +1,34 @@
+name: Set up project
+description: Set up project for CI/CD workflows
+
+inputs:
+  op-service-account-token:
+    description: '1Password service account token'
+    required: true
+
+  install-deps:
+    description: 'Whether to install dependencies'
+    required: false
+    default: 'true'
+
+  use-turbo:
+    description: 'Whether to set up Turbo cache'
+    required: false
+    default: 'true'
+
+runs:
+  using: composite
+  steps:
+    - name: Set up Node.js
+      uses: ./.github/actions/setup-node
+
+    - name: Set up Turbo
+      if: ${{ inputs.use-turbo == 'true' }}
+      uses: ./.github/actions/setup-turbo
+      with:
+        op-service-account-token: ${{ inputs.op-service-account-token }}
+
+    - name: Install dependencies
+      if: ${{ inputs.install-deps == 'true' }}
+      shell: bash
+      run: pnpm install --frozen-lockfile --prefer-offline

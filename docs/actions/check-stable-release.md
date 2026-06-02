@@ -12,7 +12,7 @@ Checks whether the triggering workflow is a stable release.
   with:
     # Optional inputs (uncomment if needed)
     # commit-message: 'chore(main): release'
-    # commit-author: 'github-actions[bot]'
+    # commit-author: 'apitree-github-actions[bot]'
 ```
 
 ### Job Example
@@ -33,10 +33,10 @@ jobs:
 
 ## 📥 Inputs
 
-| Input            | Description                                            | Required |         Default          |
-| :--------------- | :----------------------------------------------------- | :------: | :----------------------: |
-| `commit-message` | Exact release commit message used for detection        |    No    | `'chore(main): release'` |
-| `commit-author`  | Exact username of the commit author used for detection |    No    | `'github-actions[bot]'`  |
+| Input            | Description                                            | Required |             Default             |
+| :--------------- | :----------------------------------------------------- | :------: | :-----------------------------: |
+| `commit-message` | Exact release commit message used for detection        |    No    |    `'chore(main): release'`     |
+| `commit-author`  | Exact username of the commit author used for detection |    No    | `'apitree-github-actions[bot]'` |
 
 ## 📤 Outputs
 

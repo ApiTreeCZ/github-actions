@@ -14,7 +14,7 @@ Run Turbo task with controlled concurrency and no telemetry.
     task: 'build'
 
     # Optional inputs (uncomment if needed)
-    # runner: 'pnpm turbo run'
+    # turbo-bin: 'pnpx turbo'
     # concurrency: '10'
 ```
 
@@ -35,16 +35,16 @@ jobs:
         with:
           task: 'build'
           concurrency: '5'
-          runner: 'npx turbo run'
+          turbo-bin: 'npx turbo'
 ```
 
 ## 📥 Inputs
 
-| Input         | Description                                        | Required |      Default       |
-| :------------ | :------------------------------------------------- | :------: | :----------------: |
-| `task`        | The Turbo task to run                              | **Yes**  |         -          |
-| `concurrency` | Controls number of Turbo tasks running in parallel |    No    |       `'10'`       |
-| `runner`      | Script to use for invoking `turbo run` tasks       |    No    | `'pnpm turbo run'` |
+| Input         | Description                                        | Required |    Default     |
+| :------------ | :------------------------------------------------- | :------: | :------------: |
+| `task`        | The Turbo task to run                              | **Yes**  |       -        |
+| `concurrency` | Controls number of Turbo tasks running in parallel |    No    |     `'10'`     |
+| `turbo-bin`   | The command to run the Turbo CLI                   |    No    | `'pnpx turbo'` |
 
 ## 📤 Outputs
 

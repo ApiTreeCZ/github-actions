@@ -14,9 +14,9 @@ This action automatically configures Git using [setup-git](./setup-git.md) (auth
   with:
     # Required inputs
     op-service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
-    body: ${{ steps.release-info.outputs.result }}
 
     # Optional inputs (uncomment if needed)
+    # changeset-bin: 'pnpx @changesets/cli'
     # title: 'chore(main): release'
     # branch: 'release/main'
     # base: 'main'
@@ -46,7 +46,6 @@ jobs:
         uses: ApiTreeCZ/github-actions/.github/actions/create-release-pr@v0.4.0
         with:
           op-service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
-          body: ${{ steps.release-info.outputs.result }}
 ```
 
 ## 📥 Inputs
@@ -54,7 +53,7 @@ jobs:
 | Input                      | Description                                                           | Required |         Default          |
 | :------------------------- | :-------------------------------------------------------------------- | :------: | :----------------------: |
 | `op-service-account-token` | 1Password service account token with access to GitHub Actions secrets | **Yes**  |            -             |
-| `body`                     | The body of the release PR                                            | **Yes**  |            -             |
+| `changeset-bin`            | The command to run the Changesets CLI                                 |    No    | `'pnpx @changesets/cli'` |
 | `title`                    | The title of the release PR                                           |    No    | `'chore(main): release'` |
 | `branch`                   | The branch name for the release PR                                    |    No    |     `'release/main'`     |
 | `base`                     | The base branch for the release PR                                    |    No    |         `'main'`         |
@@ -74,6 +73,7 @@ jobs:
 - **Runs on**: `ubuntu-latest`, `macos-latest` (does not currently support Windows runners due to dependencies)
 - **Dependencies**:
   - [setup-git](./setup-git.md)
+  - [collect-release-info](./collect-release-info.md)
   - [actions/checkout](https://github.com/actions/checkout)
   - [peter-evans/create-pull-request](https://github.com/peter-evans/create-pull-request)
 - **Under the hood**:

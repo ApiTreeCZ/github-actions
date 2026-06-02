@@ -1,0 +1,59 @@
+name: Create stable release
+description: Creates and tags a stable release with Changesets
+
+inputs:
+  op-service-account-token:
+    description: '1Password service account token with access to GitHub Actions secrets'
+    required: true
+
+  build-script:
+    description: 'The command to run the build script'
+    required: false
+    default: 'pnpm run build'
+
+  changeset-bin:
+    description: 'The command to run the Changesets CLI'
+    required: false
+    default: 'pnpx @changesets/cli'
+
+  publish-packages:
+    description: 'Whether to publish packages to the registry'
+    required: false
+    default: 'true'
+
+runs:
+  using: composite
+  steps:
+    - name: Set up Git
+      id: setup-git
+      uses: ApiTreeCZ/github-actions/.github/actions/setup-git@v0.4.0
+      with:
+        op-service-account-token: ${{ inputs.op-service-account-token }}
+        permission-contents: 'write'
+
+    - name: Checkout code
+      uses: actions/checkout@v6
+      with:
+        clean: true
+        fetch-depth: 0
+        persist-credentials: false
+        token: ${{ steps.setup-git.outputs.token }}
+
+    - name: Set up project
+      uses: ./.github/actions/setup-project
+      with:
+        op-service-account-token: ${{ inputs.op-service-account-token }}
+
+    - name: Build and publish stable release
+      shell: bash
+      # language=bash
+      run: |
+        ${{ inputs.build-script }}
+
+        if [ "${{ inputs.publish-packages }}" == "true" ]; then
+            ${{ inputs.changeset-bin }} publish
+        else
+            echo "Skipping publish as \"publish-packages\" is set to false"
+        fi
+
+        git push --follow-tags

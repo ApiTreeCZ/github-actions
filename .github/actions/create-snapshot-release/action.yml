@@ -1,0 +1,55 @@
+name: Create snapshot release
+description: Creates a snapshot release with Changesets
+
+inputs:
+  op-service-account-token:
+    description: '1Password service account token with access to GitHub Actions secrets'
+    required: true
+
+  build-script:
+    description: 'The command to run the build script'
+    required: false
+    default: 'pnpm run build'
+
+  changeset-bin:
+    description: 'The command to run the Changesets CLI'
+    required: false
+    default: 'pnpx @changesets/cli'
+
+  dist-tag:
+    description: 'The dist tag to publish the snapshot release under'
+    required: false
+    default: 'next'
+
+  publish-packages:
+    description: 'Whether to publish packages to the registry'
+    required: false
+    default: 'true'
+
+runs:
+  using: composite
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v6
+      with:
+        clean: true
+        fetch-depth: 0
+        persist-credentials: false
+
+    - name: Set up project
+      uses: ./.github/actions/setup-project
+      with:
+        op-service-account-token: ${{ inputs.op-service-account-token }}
+
+    - name: Build and publish snapshot release
+      shell: bash
+      # language=bash
+      run: |
+        ${{ inputs.changeset-bin }} version --snapshot ${{ inputs.dist-tag }}
+        ${{ inputs.build-script }}
+
+        if [ "${{ inputs.publish-packages }}" == "true" ]; then
+            ${{ inputs.changeset-bin }} publish --tag ${{ inputs.dist-tag }} --no-git-tag
+        else
+            echo "Skipping publish as \"publish-packages\" is set to false"
+        fi
