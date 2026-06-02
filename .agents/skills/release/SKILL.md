@@ -32,7 +32,7 @@ Wait for their answer. Then bump the version using semver:
 
 Read root `package.json` to find the current `version: "X.Y.Z"` field. Update it in-place.
 Read all markdown files under `docs/actions/*.md` and `docs/workflows/*.md`. Update any version and/or branch references in `uses` fields (e.g., `uses: ApiTreeCZ/github-actions/.github/actions/some-action@vX.Y.Z` or `uses: ApiTreeCZ/github-actions/.github/workflows/some-workflow.yml@main`) to the new version.
-Read all `action.yml` files under `.github/actions/*` and all `.github/workflows/*/*.yml` files. Update any version and/or branch references to `ApiTreeCZ/github-actions` in `uses` fields to the new version.
+Read all `.github/actions/*/action.yml` files and all `.github/workflows/*.yml` files. Update any version and/or branch references to `ApiTreeCZ/github-actions` in `uses` fields to the new version.
 
 ## Commit & Tag
 
