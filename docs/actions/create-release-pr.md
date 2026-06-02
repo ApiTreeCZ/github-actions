@@ -10,7 +10,7 @@ This action automatically configures Git using [setup-git](./setup-git.md) (auth
 
 ```yaml
 - name: Create release PR
-  uses: ApiTreeCZ/github-actions/.github/actions/create-release-pr@v0.5.0
+  uses: ApiTreeCZ/github-actions/.github/actions/create-release-pr@v0.5.1
   with:
     # Required inputs
     op-service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
@@ -41,10 +41,10 @@ jobs:
 
       - name: Collect release info
         id: release-info
-        uses: ApiTreeCZ/github-actions/.github/actions/collect-release-info@v0.5.0
+        uses: ApiTreeCZ/github-actions/.github/actions/collect-release-info@v0.5.1
 
       - name: Create release PR
-        uses: ApiTreeCZ/github-actions/.github/actions/create-release-pr@v0.5.0
+        uses: ApiTreeCZ/github-actions/.github/actions/create-release-pr@v0.5.1
         with:
           op-service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
 ```

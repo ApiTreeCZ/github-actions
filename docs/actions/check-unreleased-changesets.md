@@ -9,7 +9,7 @@ Detects if there are any unreleased Changesets in the repository.
 ```yaml
 - name: Check unreleased Changesets
   id: check-unreleased-changesets
-  uses: ApiTreeCZ/github-actions/.github/actions/check-unreleased-changesets@v0.5.0
+  uses: ApiTreeCZ/github-actions/.github/actions/check-unreleased-changesets@v0.5.1
 ```
 
 ### Job Example
@@ -26,7 +26,7 @@ jobs:
 
       - name: Check unreleased Changesets
         id: check-unreleased-changesets
-        uses: ApiTreeCZ/github-actions/.github/actions/check-unreleased-changesets@v0.5.0
+        uses: ApiTreeCZ/github-actions/.github/actions/check-unreleased-changesets@v0.5.1
 ```
 
 ## 📥 Inputs
