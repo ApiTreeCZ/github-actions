@@ -1,0 +1,86 @@
+name: Create release PR
+description: Creates a release PR with collected release info from Changesets
+
+inputs:
+  op-service-account-token:
+    description: '1Password service account token with access to GitHub Actions secrets'
+    required: true
+
+  changeset-bin:
+    description: 'The command to run the Changesets CLI'
+    required: false
+    default: 'pnpx @changesets/cli'
+
+  title:
+    description: 'The title of the release PR'
+    required: false
+    default: 'chore(main): release'
+
+  branch:
+    description: 'The branch name for the release PR'
+    required: false
+    default: 'release/main'
+
+  base:
+    description: 'The base branch for the release PR'
+    required: false
+    default: 'main'
+
+  commit-message:
+    description: 'The commit message for the release PR'
+    required: false
+    default: 'chore(main): release'
+
+  labels:
+    description: 'Labels to add to the release PR (comma-separated)'
+    required: false
+
+outputs:
+  pr-number:
+    description: 'The number of the created release PR'
+    value: ${{ steps.create-pr.outputs.pull-request-number }}
+
+  pr-url:
+    description: 'The URL of the created release PR'
+    value: ${{ steps.create-pr.outputs.pull-request-url }}
+
+runs:
+  using: composite
+  steps:
+    - name: Set up Git
+      id: setup-git
+      uses: ./.github/actions/setup-git
+      with:
+        op-service-account-token: ${{ inputs.op-service-account-token }}
+        permission-contents: 'write'
+
+    - name: Checkout code
+      uses: actions/checkout@v6
+      with:
+        clean: true
+        fetch-depth: 0
+        persist-credentials: false
+        token: ${{ steps.setup-git.outputs.token }}
+
+    - name: Create release versions
+      shell: bash
+      run: ${{ inputs.changeset-bin }} version
+
+    - name: Collect release info
+      id: release-info
+      uses: ./.github/actions/collect-release-info
+
+    - name: Create release PR
+      id: create-pr
+      uses: peter-evans/create-pull-request@v8
+      with:
+        author: ${{ steps.setup-git.outputs.user-name }} <${{ steps.setup-git.outputs.user-email }}>
+        base: ${{ inputs.base }}
+        body: ${{ steps.release-info.outputs.result }}
+        branch: ${{ inputs.branch }}
+        commit-message: ${{ inputs.commit-message }}
+        committer: ${{ steps.setup-git.outputs.user-name }} <${{ steps.setup-git.outputs.user-email }}>
+        delete-branch: true
+        labels: ${{ inputs.labels }}
+        title: ${{ inputs.title }}
+        token: ${{ steps.setup-git.outputs.token }}

@@ -1,6 +1,6 @@
 # AGENTS.md
 
-This repository contains reusable GitHub Actions for ApiTree projects. It is structured as a monorepo containing multiple composite GitHub Actions.
+This repository contains reusable GitHub Actions and Workflows for ApiTree projects. It is structured as a monorepo containing multiple composite GitHub Actions and reusable workflows.
 
 ## Repository Tech Stack
 
@@ -10,21 +10,15 @@ This repository contains reusable GitHub Actions for ApiTree projects. It is str
 
 ## Project Structure
 
-Each action is placed in its own folder under `actions/` (e.g., `actions/[name]/`).
+Each action is placed in its own folder under `.github/actions/` (e.g., `.github/actions/[name]/`).
 
-- `actions/check-release-pr/`: Checks whether the workflow was triggered by a release PR.
-- `actions/check-stable-release/`: Checks whether the triggering workflow is a stable release.
-- `actions/check-unreleased-changesets/`: Detects if there are any unreleased Changesets in the repository.
-- `actions/collect-release-info/`: Collects release information from the Changesets versioning process.
-- `actions/create-release-pr/`: Creates a release PR with collected release info from Changesets.
-- `actions/create-release-tags/`: Creates Git tags for the new release based on the Changesets versioning.
-- `actions/json-to-outputs/`: Helper to parse a JSON string into individual step outputs.
-- `actions/load-secrets/`: Injects and loads secrets from 1Password vaults securely.
-- `actions/setup-git/`: Sets up Git CLI for a bot user with a short-lived token.
-- `actions/setup-node/`: Installs Node.js and configures `pnpm` package manager with caching.
-- `actions/setup-turbo/`: Configures Turborepo local & remote cache for build optimization in CI.
-- `actions/turbo-run/`: Runs a Turborepo task with controlled concurrency and no telemetry.
+- `.github/actions/[name]/`: Folders containing composite GitHub Actions (each with an `action.yml`).
+- `.github/workflows/`: Reusable workflows and repository CI workflows (like `preflight.yml` and `ci.yml`).
+- `docs/actions/[name].md`: Individual documentation files for each action.
+- `docs/workflows/[name].md`: Individual documentation files for each reusable workflow.
+- `docs/README.md`: Entry point documenting and linking all actions and workflows.
 - `docs/ACTION_README_TEMPLATE.md`: Template for generating individual action documentation.
+- `docs/WORKFLOW_README_TEMPLATE.md`: Template for generating individual reusable workflow documentation.
 
 ## Custom Agent Skills
 
@@ -45,6 +39,6 @@ When editing or creating code/config in this repository, always run these comman
 ## Constraints & Rules
 
 1. **GitHub Actions Format**: All actions should be composite actions unless explicitly instructed otherwise.
-2. **Workflow Snippets**: In action `README.md` files, do NOT include `name:` or `on:` top-level triggers in example code snippets. Focus purely on job/step context.
+2. **Workflow Snippets**: In action/workflow `README.md` files, do NOT include `name:` or `on:` top-level triggers in example code snippets. Focus purely on job/step context.
 3. **Commit Messages**: Follow Conventional Commits format (`type(scope): message`) and document changes using Changesets.
 4. **No Absolute Paths**: Never use absolute file paths (e.g., `file:///Users/...`) in documentation. Always use relative repository paths (e.g., `./[action-name]`, `../[action-name]`).

@@ -1,0 +1,85 @@
+name: Preflight
+
+on:
+  workflow_call:
+    outputs:
+      has-changesets:
+        description: Indicates whether there are any unreleased Changesets
+        value: ${{ jobs.checks.outputs.has-changesets }}
+
+      is-stable-release:
+        description: Indicates whether the workflow is a stable release or not
+        value: ${{ jobs.checks.outputs.is-stable-release }}
+
+      is-release-pr:
+        description: Indicates whether the workflow was triggered by a release PR
+        value: ${{ jobs.checks.outputs.is-release-pr }}
+
+      should-release:
+        description: Indicates whether the release process should proceed
+        value: ${{ jobs.checks.outputs.should-release }}
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    outputs:
+      has-changesets: ${{ steps.check-unreleased-changesets.outputs.result }}
+      is-stable-release: ${{ steps.check-stable-release.outputs.result }}
+      is-release-pr: ${{ steps.check-release-pr.outputs.result }}
+      should-release: ${{ steps.should-release.outputs.result }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          clean: true
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Check unreleased Changesets
+        id: check-unreleased-changesets
+        uses: ./.github/actions/check-unreleased-changesets
+
+      - name: Check stable release
+        id: check-stable-release
+        uses: ./.github/actions/check-stable-release
+
+      - name: Check release PR
+        id: check-release-pr
+        uses: ./.github/actions/check-release-pr
+
+      - name: Should release
+        id: should-release
+        shell: bash
+        # language=bash
+        run: |
+          # If this is a stable release (release PR merged to main), proceed
+          if [ "${{ steps.check-stable-release.outputs.result }}" == "true" ]; then
+            echo "Stable release detected, proceeding with release process."
+            echo "result=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # If this is a release PR, proceed (even though changesets are consumed)
+          if [ "${{ steps.check-release-pr.outputs.result }}" == "true" ]; then
+            echo "Release PR detected, proceeding with release process."
+            echo "result=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # Do not release if there are no unreleased Changesets
+          if [ "${{ steps.check-unreleased-changesets.outputs.result }}" == "false" ]; then
+            echo "No unreleased Changesets found, skipping release process."
+            echo "result=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # Finally, only proceed if this is a push to main or a workflow dispatch
+          if ([ "${{ github.event_name }}" == "push" ] && [ "${{ github.ref_name }}" == "main" ]) || [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo "Push to main or workflow dispatch detected, proceeding with release process."
+            echo "result=true" >> $GITHUB_OUTPUT
+            exit 0
+          else
+            echo "Not a push to main or workflow dispatch, skipping release process."
+            echo "result=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi

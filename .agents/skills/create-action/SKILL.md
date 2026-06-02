@@ -29,11 +29,11 @@ Ask the user for the following details. You can ask directly or suggest a standa
 ### 2. Scaffold Action Directory
 
 - **Folder Name**: Construct a kebab-case directory name from the Action Name (e.g., `Setup Node.js` -> `setup-node`).
-- **Path**: Create this directory under `actions/`: `actions/[folder-name]/`.
+- **Path**: Create this directory under `.github/actions/`: `.github/actions/[folder-name]/`.
 
 ### 3. Generate action.yml
 
-Generate the `action.yml` file under `[folder-name]/action.yml` with the following structure:
+Generate the `action.yml` file under `.github/actions/[folder-name]/action.yml` with the following structure:
 
 ```yaml
 name: [Action Name]
@@ -60,7 +60,7 @@ runs:
 
 ### 4. Generate README.md
 
-Generate the `README.md` file under `[folder-name]/README.md` based on the organization's template.
+Generate the action's documentation file under `docs/actions/[folder-name].md` based on the organization's template.
 
 - **Important**: Read the organization template from `docs/ACTION_README_TEMPLATE.md` to ensure any recent layout changes are respected.
 - **Note**: Do NOT include `name:` or `on:` triggers in any workflow code examples. Keep examples focused on the job or step context.
@@ -68,6 +68,7 @@ Generate the `README.md` file under `[folder-name]/README.md` based on the organ
   - For inputs: `| Input | Description | Required | Default |`
   - For outputs: `| Output | Description |`
   - If there are no inputs/outputs, replace the tables with a friendly paragraph explaining that there are none.
+- **Entrypoint**: Update `docs/README.md` to register the new action in the list of Available Actions.
 
 ## Validation Checklist
 

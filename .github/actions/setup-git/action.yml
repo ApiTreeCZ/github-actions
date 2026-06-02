@@ -1,0 +1,77 @@
+name: Set up Git
+description: Set up Git CLI for a bot user with a short-lived token via ApiTree GitHub Actions app and 1Password
+
+inputs:
+  op-service-account-token:
+    description: '1Password service account token with access to the vault containing ApiTree GitHub Actions app secrets'
+    required: true
+
+  permission-contents:
+    description: 'The permission level for contents (repository) scope of the token (read or write)'
+    default: 'write'
+    required: false
+
+outputs:
+  token:
+    description: 'The generated GitHub App token for authentication with GitHub API and Git operations'
+    value: ${{ steps.create-token.outputs.token }}
+
+  user-name:
+    description: 'Git username (bot) configured for Git operations'
+    value: ${{ steps.configure-git.outputs.user-name }}
+
+  user-email:
+    description: 'Git email (bot) configured for Git operations'
+    value: ${{ steps.configure-git.outputs.user-email }}
+
+runs:
+  using: composite
+  steps:
+    - name: Load GitHub Actions app secrets
+      uses: ./.github/actions/load-secrets
+      id: load-secrets
+      with:
+        op-service-account-token: ${{ inputs.op-service-account-token }}
+        secrets: |
+          CLIENT_ID=op://apitree-infra/github-actions/CLIENT_ID
+          PRIVATE_KEY=op://apitree-infra/github-actions/private-key.pem
+
+    - name: Parse secrets JSON to outputs
+      id: parse-secrets
+      uses: ./.github/actions/json-to-outputs
+      with:
+        json: ${{ steps.load-secrets.outputs.secrets }}
+
+    - name: Create GitHub App token
+      uses: actions/create-github-app-token@v3
+      id: create-token
+      with:
+        client-id: ${{ steps.parse-secrets.outputs.CLIENT_ID }}
+        private-key: ${{ steps.parse-secrets.outputs.PRIVATE_KEY }}
+        permission-contents: ${{ inputs.permission-contents }}
+
+    - name: Get GitHub App user ID
+      id: get-user-id
+      shell: bash
+      # language=bash
+      run: |
+        echo "user-id=$(gh api "/users/${{ steps.create-token.outputs.app-slug }}[bot]" --jq .id)" >> "$GITHUB_OUTPUT"
+      env:
+        GH_TOKEN: ${{ steps.create-token.outputs.token }}
+
+    - name: Configure Git
+      id: configure-git
+      shell: bash
+      # language=bash
+      run: |
+        USER_NAME="${{ steps.create-token.outputs.app-slug }}[bot]"
+        USER_EMAIL="${{ steps.get-user-id.outputs.user-id }}+${{ steps.create-token.outputs.app-slug }}[bot]@users.noreply.github.com"
+
+        git config --global user.name "$USER_NAME"
+        git config --global user.email "$USER_EMAIL"
+        gh auth setup-git
+
+        echo "user-name=$USER_NAME" >> "$GITHUB_OUTPUT"
+        echo "user-email=$USER_EMAIL" >> "$GITHUB_OUTPUT"
+      env:
+        GH_TOKEN: ${{ steps.create-token.outputs.token }}
