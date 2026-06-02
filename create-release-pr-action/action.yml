@@ -6,9 +6,10 @@ inputs:
     description: '1Password service account token with access to GitHub Actions secrets'
     required: true
 
-  body:
-    description: 'The body of the release PR'
-    required: true
+  changeset-bin:
+    description: 'The command to run the Changesets CLI'
+    required: false
+    default: 'pnpx @changesets/cli'
 
   title:
     description: 'The title of the release PR'
@@ -53,13 +54,29 @@ runs:
         op-service-account-token: ${{ inputs.op-service-account-token }}
         permission-contents: 'write'
 
+    - name: Checkout code
+      uses: actions/checkout@v6
+      with:
+        clean: true
+        fetch-depth: 0
+        persist-credentials: false
+        token: ${{ steps.setup-git.outputs.token }}
+
+    - name: Create release versions
+      shell: bash
+      run: ${{ inputs.changeset-bin }} version
+
+    - name: Collect release info
+      id: release-info
+      uses: ./collect-release-info-action
+
     - name: Create release PR
       id: create-pr
       uses: peter-evans/create-pull-request@v7
       with:
         author: ${{ steps.setup-git.outputs.user-name }} <${{ steps.setup-git.outputs.user-email }}>
         base: ${{ inputs.base }}
-        body: ${{ inputs.body }}
+        body: ${{ steps.release-info.outputs.result }}
         branch: ${{ inputs.branch }}
         commit-message: ${{ inputs.commit-message }}
         committer: ${{ steps.setup-git.outputs.user-name }} <${{ steps.setup-git.outputs.user-email }}>

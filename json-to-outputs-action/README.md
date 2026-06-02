@@ -62,3 +62,4 @@ Exposes outputs dynamically. Each key parsed from the input JSON will be registe
 
 - **Type**: `node24`
 - **Runs on**: `ubuntu-latest`, `macos-latest`, `windows-latest`
+- **Dependencies**: None

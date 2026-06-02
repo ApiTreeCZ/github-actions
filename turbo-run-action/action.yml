@@ -11,10 +11,10 @@ inputs:
     required: false
     default: '10'
 
-  runner:
-    description: 'Script to use for invoking turbo run tasks'
+  turbo-bin:
+    description: 'The command to run the Turbo CLI'
     required: false
-    default: 'pnpm turbo run'
+    default: 'pnpx turbo'
 
 runs:
   using: composite
@@ -24,4 +24,4 @@ runs:
       env:
         TURBO_CONCURRENCY: ${{ inputs.concurrency }}
         TURBO_TELEMETRY_DISABLED: 1
-      run: ${{ inputs.runner }} ${{ inputs.task }}
+      run: ${{ inputs.turbo-bin }} run ${{ inputs.task }}

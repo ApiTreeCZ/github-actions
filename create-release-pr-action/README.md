@@ -74,4 +74,11 @@ jobs:
 - **Runs on**: `ubuntu-latest`, `macos-latest` (does not currently support Windows runners due to dependencies)
 - **Dependencies**:
   - [setup-git-action](../setup-git-action)
+  - [actions/checkout](https://github.com/actions/checkout)
   - [peter-evans/create-pull-request](https://github.com/peter-evans/create-pull-request)
+- **Under the hood**:
+  - Configures global Git configurations using [setup-git-action](../setup-git-action).
+  - Checks out the repository with the generated token.
+  - Generates a release with `changeset version` command.
+  - Collects release information using [collect-release-info-action](../collect-release-info-action).
+  - Uses `peter-evans/create-pull-request` to create or update a release branch and open the release PR.
