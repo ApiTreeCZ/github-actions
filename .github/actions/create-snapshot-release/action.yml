@@ -2,10 +2,6 @@ name: Create snapshot release
 description: Creates a snapshot release with Changesets
 
 inputs:
-  op-service-account-token:
-    description: '1Password service account token with access to GitHub Actions secrets'
-    required: true
-
   before-script:
     description: 'The command to run before creating the snapshot release'
     required: false
@@ -51,10 +47,8 @@ runs:
         fetch-depth: 0
         persist-credentials: false
 
-    - name: Set up project
-      uses: ApiTreeCZ/github-actions/.github/actions/setup-project@main
-      with:
-        op-service-account-token: ${{ inputs.op-service-account-token }}
+    - name: Set up Node.js
+      uses: ApiTreeCZ/github-actions/.github/actions/setup-node@main
 
     - name: Run before script
       if: ${{ inputs.before-script != '' }}

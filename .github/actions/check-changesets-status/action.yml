@@ -2,10 +2,6 @@ name: Check Changesets status
 description: Checks presence of Changesets on a PR and reports the status
 
 inputs:
-  op-service-account-token:
-    description: '1Password service account token with access to the vault containing GitHub Actions secrets'
-    required: true
-
   before-script:
     description: 'The command to run before checking the Changesets status'
     required: false
@@ -30,6 +26,9 @@ runs:
         clean: true
         fetch-depth: 0
         persist-credentials: false
+
+    - name: Set up Node.js
+      uses: ApiTreeCZ/github-actions/.github/actions/setup-node@main
 
     - name: Run before script
       if: ${{ inputs.before-script != '' }}

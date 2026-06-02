@@ -44,10 +44,8 @@ runs:
         persist-credentials: false
         token: ${{ steps.setup-git.outputs.token }}
 
-    - name: Set up project
-      uses: ApiTreeCZ/github-actions/.github/actions/setup-project@main
-      with:
-        op-service-account-token: ${{ inputs.op-service-account-token }}
+    - name: Set up Node.js
+      uses: ApiTreeCZ/github-actions/.github/actions/setup-node@main
 
     - name: Run before script
       if: ${{ inputs.before-script != '' }}
