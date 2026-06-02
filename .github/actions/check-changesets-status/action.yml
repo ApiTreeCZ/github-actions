@@ -1,0 +1,99 @@
+name: Check Changesets status
+description: Checks presence of Changesets on a PR and reports the status
+
+inputs:
+  op-service-account-token:
+    description: '1Password service account token with access to the vault containing GitHub Actions secrets'
+    required: true
+
+  before-script:
+    description: 'The command to run before checking the Changesets status'
+    required: false
+    default: ''
+
+  changeset-bin:
+    description: 'The command to run the Changesets CLI'
+    required: false
+    default: 'pnpx @changesets/cli'
+
+  origin-ref:
+    description: 'The Git ref to compare the changesets status against'
+    required: false
+    default: 'origin/main'
+
+runs:
+  using: composite
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v6
+      with:
+        clean: true
+        fetch-depth: 0
+        persist-credentials: false
+
+    - name: Run before script
+      if: ${{ inputs.before-script != '' }}
+      shell: bash
+      run: ${{ inputs.before-script }}
+
+    - name: Check changesets
+      id: changesets
+      shell: bash
+      # language=bash
+      run: |
+        CHANGESET_STATUS=""
+        RESULT=false
+        SINCE_REF="${{ inputs.origin-ref }}"
+
+        if ! ${{ inputs.changeset-bin }} status --since="$SINCE_REF"; then
+          RESULT=false
+        else
+          CHANGESET_STATUS=$(${{ inputs.changeset-bin }} status --since="$SINCE_REF" | sed 's/\x1B\[[0-9;]*[JKmsu]//g'  | sed 's/info //g')
+
+          if echo "$CHANGESET_STATUS" | grep -q "NO packages to be bumped at patch" && \
+            echo "$CHANGESET_STATUS" | grep -q "NO packages to be bumped at minor" && \
+            echo "$CHANGESET_STATUS" | grep -q "NO packages to be bumped at major"; then
+            RESULT=false
+          else
+            RESULT=true
+          fi
+        fi
+
+        {
+          echo "changeset-status<<EOF"
+          echo "$CHANGESET_STATUS"
+          echo "EOF"
+          echo "result=$RESULT"
+          echo "since-ref=$SINCE_REF"
+        } >> $GITHUB_OUTPUT
+
+    - name: Add success message about changesets
+      if: steps.changesets.outputs.result == 'true'
+      uses: thollander/actions-comment-pull-request@v3
+      with:
+        comment-tag: changesets
+        # language=md
+        message: |
+          ### 🦋 Changesets found
+
+          This PR contains changes that will result in a version bump for at least one package 🚀
+
+          #### Changeset status since `${{ steps.changesets.outputs.since-ref }}`
+
+          ```
+          ${{ steps.changesets.outputs.changeset-status }}
+          ```
+
+    - name: Add warning about missing changesets
+      if: steps.changesets.outputs.result == 'false'
+      uses: thollander/actions-comment-pull-request@v3
+      with:
+        comment-tag: changesets
+        # language=md
+        message: |
+          ### ⚠️ No changesets found
+
+          Run `${{ inputs.changeset-bin }} add` to create a changeset for this PR if changes in it should result in a
+          version bump for any package.
+
+          **If this PR should not result in any version bumps, then we are good to go 👌**

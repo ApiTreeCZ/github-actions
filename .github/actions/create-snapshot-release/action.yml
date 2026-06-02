@@ -21,15 +21,25 @@ inputs:
     required: false
     default: 'pnpx @changesets/cli'
 
+  publish-packages:
+    description: 'Whether to publish packages to the registry'
+    required: false
+    default: 'true'
+
   dist-tag:
     description: 'The dist tag to publish the snapshot release under'
     required: false
     default: 'next'
 
-  publish-packages:
-    description: 'Whether to publish packages to the registry'
+  is-release-pr:
+    description: 'Indicates the workflow is running in a release PR'
     required: false
-    default: 'true'
+    default: 'false'
+
+  release-commit-message:
+    description: 'The commit message that indicates a release commit, used to find the parent commit to build the snapshot release from in release PRs'
+    required: false
+    default: 'chore(main): release'
 
 runs:
   using: composite
@@ -51,15 +61,70 @@ runs:
       shell: bash
       run: ${{ inputs.before-script }}
 
+    - name: Checkout parent commit on release PR
+      if: ${{ inputs.is-release-pr == 'true' }}
+      shell: bash
+      # language=bash
+      run: |
+        # Find the release commit
+        RELEASE_COMMIT=$(git log -1 --grep="^${{ inputs.release-commit-message }}$" --format="%H" || echo "")
+
+        if [ -n "$RELEASE_COMMIT" ]; then
+          # Get the parent commit (the one that triggered the release)
+          PARENT_COMMIT=$(git rev-parse ${RELEASE_COMMIT}^)
+          echo "Release commit: $RELEASE_COMMIT"
+          echo "Parent commit: $PARENT_COMMIT"
+
+          # Checkout the parent commit (where changesets still exist)
+          # Note: Packages will be built after this action completes in the workflow
+          git checkout "$PARENT_COMMIT"
+        else
+          echo "::warning::Release commit not found, using current commit"
+        fi
+
     - name: Build and publish snapshot release
       shell: bash
+      id: build-and-publish
       # language=bash
       run: |
         ${{ inputs.changeset-bin }} version --snapshot ${{ inputs.dist-tag }}
         ${{ inputs.build-script }}
 
         if [ "${{ inputs.publish-packages }}" == "true" ]; then
-            ${{ inputs.changeset-bin }} publish --tag ${{ inputs.dist-tag }} --no-git-tag
+            OUTPUT=$(${{ inputs.changeset-bin }} publish --tag ${{ inputs.dist-tag }} --no-git-tag 2>&1 || true)
+
+            echo "$OUTPUT"
+
+            # Extract published packages by matching "info Publishing" lines
+            # Strip ANSI color codes first, then extract package names
+            # These lines look like: 🦋  info Publishing "@scope/package" at "version"
+            PACKAGES=$(echo "$OUTPUT" | sed 's/\x1b\[[0-9;]*m//g' | { grep 'info Publishing' || true; } | sed -E 's/.*"([^"]+)" at "([^"]+)".*/\1@\2/')
+
+            # Only set output if packages were found
+            if [ -n "$PACKAGES" ]; then
+              {
+                echo "packages<<PACKAGES_EOF"
+                echo "$PACKAGES"
+                echo "PACKAGES_EOF"
+              } >> $GITHUB_OUTPUT
+            fi
         else
-            echo "Skipping publish as \"publish-packages\" is set to false"
+            echo "::warning::Skipping publish as \"publish-packages\" is set to false"
+            echo 
         fi
+
+    - name: Comment on release PR
+      if: ${{ inputs.is-release-pr == 'true' && steps.build-and-publish.outputs.packages }}
+      uses: thollander/actions-comment-pull-request@v3
+      with:
+        comment-tag: npm-packages
+        pr-number: ${{ github.event.pull_request.number }}
+        # language=md
+        message: |
+          ### 📦 NPM Packages Published Successfully
+
+          The following snapshot packages have been published to the `${{ inputs.dist-tag }}` dist-tag:
+
+          ```
+          ${{ needs.publish.outputs.published-packages }}
+          ```

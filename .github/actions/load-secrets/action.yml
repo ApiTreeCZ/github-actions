@@ -2,6 +2,10 @@ name: Load secrets
 description: Loads secrets from 1Password vault(s) allowing to export them as env vars
 
 inputs:
+  op-service-account-token:
+    description: '1Password service account token with access to the vault(s)'
+    required: true
+
   secrets:
     description: 'Secrets references in "KEY=op://..." format, one per line'
     required: true
@@ -10,10 +14,6 @@ inputs:
     description: 'Whether to export secrets as environment variables (boolean or multi-line list of specific keys)'
     required: false
     default: 'false'
-
-  op-service-account-token:
-    description: '1Password service account token with access to the vault(s)'
-    required: true
 
   op-env-file:
     description: 'Path to template .env file for secrets injection'
