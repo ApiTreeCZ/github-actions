@@ -8,7 +8,7 @@ Set up Git CLI for a bot user with a short-lived token via ApiTree GitHub Action
 
 ```yaml
 - name: Set up Git
-  uses: ApiTreeCZ/github-actions/setup-git-action@v0.1.0
+  uses: ApiTreeCZ/github-actions/setup-git-action@main
   with:
     # Required inputs
     op-service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
@@ -26,13 +26,17 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v6
-
       - name: Set up Git
-        uses: ApiTreeCZ/github-actions/setup-git-action@v0.1.0
+        id: setup-git
+        uses: ApiTreeCZ/github-actions/setup-git-action@main
         with:
           op-service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
+          permission-contents: 'write' # Optional, defaults to 'write'
+
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          token: ${{ steps.setup-git.outputs.token }}
 
       - name: Commit and push changes
         run: |
@@ -50,7 +54,11 @@ jobs:
 
 ## 📤 Outputs
 
-_This action does not define any outputs._
+| Output       | Description                                                                          |
+| :----------- | :----------------------------------------------------------------------------------- |
+| `token`      | The generated GitHub App token for authentication with GitHub API and Git operations |
+| `user-name`  | Git username (bot) configured for Git operations                                     |
+| `user-email` | Git email (bot) configured for Git operations                                        |
 
 ## 🛠️ Details
 
