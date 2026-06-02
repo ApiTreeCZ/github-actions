@@ -49,7 +49,7 @@ runs:
   steps:
     - name: Set up Git
       id: setup-git
-      uses: ./setup-git-action
+      uses: ./actions/setup-git
       with:
         op-service-account-token: ${{ inputs.op-service-account-token }}
         permission-contents: 'write'
@@ -68,7 +68,7 @@ runs:
 
     - name: Collect release info
       id: release-info
-      uses: ./collect-release-info-action
+      uses: ./actions/collect-release-info
 
     - name: Create release PR
       id: create-pr

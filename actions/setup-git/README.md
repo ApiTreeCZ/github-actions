@@ -1,4 +1,4 @@
-# ⚙️ `setup-git-action`
+# ⚙️ `setup-git`
 
 Set up Git CLI for a bot user with a short-lived token via ApiTree GitHub Actions app and 1Password.
 
@@ -8,7 +8,7 @@ Set up Git CLI for a bot user with a short-lived token via ApiTree GitHub Action
 
 ```yaml
 - name: Set up Git
-  uses: ApiTreeCZ/github-actions/setup-git-action@main
+  uses: ApiTreeCZ/github-actions/actions/setup-git@main
   with:
     # Required inputs
     op-service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
@@ -28,7 +28,7 @@ jobs:
     steps:
       - name: Set up Git
         id: setup-git
-        uses: ApiTreeCZ/github-actions/setup-git-action@main
+        uses: ApiTreeCZ/github-actions/actions/setup-git@main
         with:
           op-service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
           permission-contents: 'write' # Optional, defaults to 'write'
@@ -65,11 +65,11 @@ jobs:
 - **Type**: `composite`
 - **Runs on**: `ubuntu-latest`, `macos-latest` (does not currently support Windows runners due to dependencies)
 - **Dependencies**:
-  - [load-secrets-action](../load-secrets-action)
-  - [json-to-outputs-action](../json-to-outputs-action)
+  - [load-secrets](../load-secrets)
+  - [json-to-outputs](../json-to-outputs)
   - [actions/create-github-app-token](https://github.com/actions/create-github-app-token)
 - **Under the hood**:
-  - Loads GitHub App credentials from a 1Password vault using [load-secrets-action](../load-secrets-action).
-  - Parses credentials using [json-to-outputs-action](../json-to-outputs-action).
+  - Loads GitHub App credentials from a 1Password vault using [load-secrets](../load-secrets).
+  - Parses credentials using [json-to-outputs](../json-to-outputs).
   - Generates a short-lived installation token using [actions/create-github-app-token](https://github.com/actions/create-github-app-token).
   - Configures global Git configurations (username and email) and credentials helper using the token.

@@ -1,8 +1,8 @@
-# ⚙️ `create-release-pr-action`
+# ⚙️ `create-release-pr`
 
 Creates a release Pull Request (PR) with collected release info from Changesets.
 
-This action automatically configures Git using [setup-git-action](../setup-git-action) (authenticating via a 1Password service account token) and then uses `peter-evans/create-pull-request` to create or update a release branch and open the release PR.
+This action automatically configures Git using [setup-git](../setup-git) (authenticating via a 1Password service account token) and then uses `peter-evans/create-pull-request` to create or update a release branch and open the release PR.
 
 ## 🚀 Usage
 
@@ -10,7 +10,7 @@ This action automatically configures Git using [setup-git-action](../setup-git-a
 
 ```yaml
 - name: Create Release PR
-  uses: ApiTreeCZ/github-actions/create-release-pr-action@main
+  uses: ApiTreeCZ/github-actions/actions/create-release-pr@main
   with:
     # Required inputs
     op-service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
@@ -40,10 +40,10 @@ jobs:
 
       - name: Collect Release Info
         id: release-info
-        uses: ApiTreeCZ/github-actions/collect-release-info-action@main
+        uses: ApiTreeCZ/github-actions/actions/collect-release-info@main
 
       - name: Create Release PR
-        uses: ApiTreeCZ/github-actions/create-release-pr-action@main
+        uses: ApiTreeCZ/github-actions/actions/create-release-pr@main
         with:
           op-service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
           body: ${{ steps.release-info.outputs.result }}
@@ -73,12 +73,12 @@ jobs:
 - **Type**: `composite`
 - **Runs on**: `ubuntu-latest`, `macos-latest` (does not currently support Windows runners due to dependencies)
 - **Dependencies**:
-  - [setup-git-action](../setup-git-action)
+  - [setup-git](../setup-git)
   - [actions/checkout](https://github.com/actions/checkout)
   - [peter-evans/create-pull-request](https://github.com/peter-evans/create-pull-request)
 - **Under the hood**:
-  - Configures global Git configurations using [setup-git-action](../setup-git-action).
+  - Configures global Git configurations using [setup-git](../setup-git).
   - Checks out the repository with the generated token.
   - Generates a release with `changeset version` command.
-  - Collects release information using [collect-release-info-action](../collect-release-info-action).
+  - Collects release information using [collect-release-info](../collect-release-info).
   - Uses `peter-evans/create-pull-request` to create or update a release branch and open the release PR.

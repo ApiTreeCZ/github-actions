@@ -1,4 +1,4 @@
-# ⚙️ `check-unreleased-changesets-action`
+# ⚙️ `check-unreleased-changesets`
 
 Detects if there are any unreleased Changesets in the repository.
 
@@ -9,7 +9,7 @@ Detects if there are any unreleased Changesets in the repository.
 ```yaml
 - name: Check unreleased Changesets
   id: check-unreleased-changesets
-  uses: ApiTreeCZ/github-actions/check-unreleased-changesets-action@main
+  uses: ApiTreeCZ/github-actions/actions/check-unreleased-changesets@main
 ```
 
 ### Job Example
@@ -26,7 +26,7 @@ jobs:
 
       - name: Check unreleased Changesets
         id: check-unreleased-changesets
-        uses: ApiTreeCZ/github-actions/check-unreleased-changesets-action@main
+        uses: ApiTreeCZ/github-actions/actions/check-unreleased-changesets@main
 ```
 
 ## 📥 Inputs

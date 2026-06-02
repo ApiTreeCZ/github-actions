@@ -1,4 +1,4 @@
-# ⚙️ `collect-release-info-action`
+# ⚙️ `collect-release-info`
 
 Collects release information from the Changesets versioning process. It parses modified `CHANGELOG.md` files, extracts the latest changes, categorizes them by bump type (major, minor, patch), and outputs a formatted summary suitable for a GitHub release or Pull Request body.
 
@@ -9,7 +9,7 @@ Collects release information from the Changesets versioning process. It parses m
 ```yaml
 - name: Collect Release Info
   id: release-info
-  uses: ApiTreeCZ/github-actions/collect-release-info-action@v0.2.0
+  uses: ApiTreeCZ/github-actions/actions/collect-release-info@v0.2.0
 ```
 
 ### Job Example
@@ -28,7 +28,7 @@ jobs:
 
       - name: Collect Release Info
         id: release-info
-        uses: ApiTreeCZ/github-actions/collect-release-info-action@v0.2.0
+        uses: ApiTreeCZ/github-actions/actions/collect-release-info@v0.2.0
 
       - name: Create Release PR
         uses: peter-evans/create-pull-request@v6

@@ -1,4 +1,4 @@
-# ⚙️ `setup-node-action`
+# ⚙️ `setup-node`
 
 Set up [Node.js](https://nodejs.org/en) with [pnpm](https://pnpm.io/) as the package manager (cache enabled).
 
@@ -8,7 +8,7 @@ Set up [Node.js](https://nodejs.org/en) with [pnpm](https://pnpm.io/) as the pac
 
 ```yaml
 - name: Set up Node.js
-  uses: ApiTreeCZ/github-actions/setup-node-action@v0.2.0
+  uses: ApiTreeCZ/github-actions/actions/setup-node@v0.2.0
 ```
 
 ### Job Example
@@ -24,7 +24,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Set up Node.js
-        uses: ApiTreeCZ/github-actions/setup-node-action@v0.2.0
+        uses: ApiTreeCZ/github-actions/actions/setup-node@v0.2.0
 
       - name: Install dependencies
         run: pnpm install

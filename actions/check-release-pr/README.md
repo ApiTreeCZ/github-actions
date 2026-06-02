@@ -1,4 +1,4 @@
-# ⚙️ `check-release-pr-action`
+# ⚙️ `check-release-pr`
 
 Checks whether the workflow was triggered by a release PR.
 
@@ -9,7 +9,7 @@ Checks whether the workflow was triggered by a release PR.
 ```yaml
 - name: Check release PR
   id: check-release-pr
-  uses: ApiTreeCZ/github-actions/check-release-pr-action@main
+  uses: ApiTreeCZ/github-actions/actions/check-release-pr@main
   with:
     # Optional inputs (uncomment if needed)
     # branch-name: 'release/main'
@@ -29,7 +29,7 @@ jobs:
 
       - name: Check release PR
         id: check-release-pr
-        uses: ApiTreeCZ/github-actions/check-release-pr-action@main
+        uses: ApiTreeCZ/github-actions/actions/check-release-pr@main
 ```
 
 ## 📥 Inputs

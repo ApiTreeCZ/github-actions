@@ -28,7 +28,7 @@ runs:
   using: composite
   steps:
     - name: Load GitHub Actions app secrets
-      uses: ApiTreeCZ/github-actions/load-secrets-action@v0.2.0
+      uses: ApiTreeCZ/github-actions/actions/load-secrets@v0.2.0
       id: load-secrets
       with:
         op-service-account-token: ${{ inputs.op-service-account-token }}
@@ -38,7 +38,7 @@ runs:
 
     - name: Parse secrets JSON to outputs
       id: parse-secrets
-      uses: ApiTreeCZ/github-actions/json-to-outputs-action@v0.2.0
+      uses: ApiTreeCZ/github-actions/actions/json-to-outputs@v0.2.0
       with:
         json: ${{ steps.load-secrets.outputs.secrets }}
 

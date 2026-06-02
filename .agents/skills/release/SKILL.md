@@ -31,7 +31,7 @@ Wait for their answer. Then bump the version using semver:
 | patch | `X.Y.Z`         | `X.Y.Z+1`   |
 
 Read root `package.json` to find the current `version: "X.Y.Z"` field. Update it in-place.
-Read every `*-action/README.md` file for each action. Update the references to the version in `uses` fields (e.g., `uses: ApiTreeCZ/github-actions/some-action@vX.Y.Z`) to the new version.
+Read every `actions/*/README.md` file for each action. Update the references to the version in `uses` fields (e.g., `uses: ApiTreeCZ/github-actions/actions/some-action@vX.Y.Z`) to the new version.
 
 ## Commit & Tag
 

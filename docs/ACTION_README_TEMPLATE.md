@@ -8,7 +8,7 @@
 
 ```yaml
 - name: Setup [Action Name]
-  uses: ApiTreeCZ/github-actions/[action-folder-name]@main
+  uses: ApiTreeCZ/github-actions/actions/[action-folder-name]@main
   with:
     # Required inputs
     some-required-input: 'value'
@@ -30,7 +30,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Run [Action Name]
-        uses: ApiTreeCZ/github-actions/[action-folder-name]@main
+        uses: ApiTreeCZ/github-actions/actions/[action-folder-name]@main
         with:
           some-required-input: 'value'
 ```

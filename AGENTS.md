@@ -10,20 +10,20 @@ This repository contains reusable GitHub Actions for ApiTree projects. It is str
 
 ## Project Structure
 
-Each action is placed in its own folder under the repository root (e.g., `[name]-action/`).
+Each action is placed in its own folder under `actions/` (e.g., `actions/[name]/`).
 
-- `check-release-pr-action/`: Checks whether the workflow was triggered by a release PR.
-- `check-stable-release-action/`: Checks whether the triggering workflow is a stable release.
-- `check-unreleased-changesets-action/`: Detects if there are any unreleased Changesets in the repository.
-- `collect-release-info-action/`: Collects release information from the Changesets versioning process.
-- `create-release-pr-action/`: Creates a release PR with collected release info from Changesets.
-- `create-release-tags-action/`: Creates Git tags for the new release based on the Changesets versioning.
-- `json-to-outputs-action/`: Helper to parse a JSON string into individual step outputs.
-- `load-secrets-action/`: Injects and loads secrets from 1Password vaults securely.
-- `setup-git-action/`: Sets up Git CLI for a bot user with a short-lived token.
-- `setup-node-action/`: Installs Node.js and configures `pnpm` package manager with caching.
-- `setup-turbo-action/`: Configures Turborepo local & remote cache for build optimization in CI.
-- `turbo-run-action/`: Runs a Turborepo task with controlled concurrency and no telemetry.
+- `actions/check-release-pr/`: Checks whether the workflow was triggered by a release PR.
+- `actions/check-stable-release/`: Checks whether the triggering workflow is a stable release.
+- `actions/check-unreleased-changesets/`: Detects if there are any unreleased Changesets in the repository.
+- `actions/collect-release-info/`: Collects release information from the Changesets versioning process.
+- `actions/create-release-pr/`: Creates a release PR with collected release info from Changesets.
+- `actions/create-release-tags/`: Creates Git tags for the new release based on the Changesets versioning.
+- `actions/json-to-outputs/`: Helper to parse a JSON string into individual step outputs.
+- `actions/load-secrets/`: Injects and loads secrets from 1Password vaults securely.
+- `actions/setup-git/`: Sets up Git CLI for a bot user with a short-lived token.
+- `actions/setup-node/`: Installs Node.js and configures `pnpm` package manager with caching.
+- `actions/setup-turbo/`: Configures Turborepo local & remote cache for build optimization in CI.
+- `actions/turbo-run/`: Runs a Turborepo task with controlled concurrency and no telemetry.
 - `docs/ACTION_README_TEMPLATE.md`: Template for generating individual action documentation.
 
 ## Custom Agent Skills
