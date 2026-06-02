@@ -7,7 +7,7 @@ Collects release information from the Changesets versioning process. It parses m
 ### Step Snippet
 
 ```yaml
-- name: Collect Release Info
+- name: Collect release info
   id: release-info
   uses: ApiTreeCZ/github-actions/.github/actions/collect-release-info@v0.4.0
 ```
@@ -26,11 +26,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Collect Release Info
+      - name: Collect release info
         id: release-info
         uses: ApiTreeCZ/github-actions/.github/actions/collect-release-info@v0.4.0
 
-      - name: Create Release PR
+      - name: Create release PR
         uses: peter-evans/create-pull-request@v6
         with:
           title: 'Version Packages'

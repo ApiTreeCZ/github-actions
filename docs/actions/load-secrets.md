@@ -7,7 +7,7 @@ Exports and injects secrets from 1Password vault(s) securely using a 1Password S
 ### Step Snippet
 
 ```yaml
-- name: Load Secrets from 1Password
+- name: Load secrets
   uses: ApiTreeCZ/github-actions/.github/actions/load-secrets@v0.4.0
   with:
     # Required inputs

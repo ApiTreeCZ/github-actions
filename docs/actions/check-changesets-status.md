@@ -34,7 +34,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Check Changesets Status
+      - name: Check Changesets status
         uses: ApiTreeCZ/github-actions/.github/actions/check-changesets-status@v0.4.0
 ```
 

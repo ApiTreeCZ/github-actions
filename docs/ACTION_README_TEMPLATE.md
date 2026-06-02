@@ -7,7 +7,7 @@
 ### Step Snippet
 
 ```yaml
-- name: Setup [Action Name]
+- name: Setup [action name]
   uses: ApiTreeCZ/github-actions/.github/actions/[action-folder-name]@main
   with:
     # Required inputs
@@ -29,7 +29,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v6
 
-      - name: Run [Action Name]
+      - name: Run [action name]
         uses: ApiTreeCZ/github-actions/.github/actions/[action-folder-name]@main
         with:
           some-required-input: 'value'

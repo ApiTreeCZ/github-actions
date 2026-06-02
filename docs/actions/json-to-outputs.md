@@ -7,7 +7,7 @@ Parses a JSON string and dynamically exposes each key-value pair as individual o
 ### Step Snippet
 
 ```yaml
-- name: Parse JSON to Outputs
+- name: Parse JSON to outputs
   id: parse-json
   uses: ApiTreeCZ/github-actions/.github/actions/json-to-outputs@v0.4.0
   with:

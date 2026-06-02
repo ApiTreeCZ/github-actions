@@ -15,7 +15,7 @@ This composite action checks out the repository, sets up the Node.js project usi
 ### Step Snippet
 
 ```yaml
-- name: Create Snapshot Release
+- name: Create snapshot release
   uses: ApiTreeCZ/github-actions/.github/actions/create-snapshot-release@v0.4.0
   with:
     # Required inputs
@@ -40,9 +40,10 @@ jobs:
   release:
     runs-on: ubuntu-latest
     permissions:
-      id-token: write # Required for OIDC trusted publishing
+      id-token: write # Required for OIDC trusted publishing if `publish-packages` is `true`
+      pull-requests: write # Required to comment on release PRs if `is-release-pr` is `true`
     steps:
-      - name: Create Snapshot Release
+      - name: Create snapshot release
         uses: ApiTreeCZ/github-actions/.github/actions/create-snapshot-release@v0.4.0
         with:
           op-service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
