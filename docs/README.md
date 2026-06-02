@@ -12,6 +12,7 @@ These custom composite actions can be used as steps within your workflow jobs.
 
 | Action                                                                  | Description                                                             |
 | :---------------------------------------------------------------------- | :---------------------------------------------------------------------- |
+| [check-changesets-status](./actions/check-changesets-status.md)         | Checks presence of Changesets on a PR and reports the status.           |
 | [check-release-pr](./actions/check-release-pr.md)                       | Checks whether the workflow was triggered by a release PR.              |
 | [check-stable-release](./actions/check-stable-release.md)               | Checks whether the triggering workflow is a stable release.             |
 | [check-unreleased-changesets](./actions/check-unreleased-changesets.md) | Detects if there are any unreleased Changesets in the repository.       |

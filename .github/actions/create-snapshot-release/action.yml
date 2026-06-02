@@ -126,5 +126,5 @@ runs:
           The following snapshot packages have been published to the `${{ inputs.dist-tag }}` dist-tag:
 
           ```
-          ${{ needs.publish.outputs.published-packages }}
+          ${{ steps.build-and-publish.outputs.packages }}
           ```

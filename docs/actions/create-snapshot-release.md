@@ -27,6 +27,8 @@ This composite action checks out the repository, sets up the Node.js project usi
     # changeset-bin: 'pnpx @changesets/cli'
     # dist-tag: 'next'
     # publish-packages: 'true'
+    # is-release-pr: 'false'
+    # release-commit-message: 'chore(main): release'
 ```
 
 ### Job Example
@@ -48,14 +50,16 @@ jobs:
 
 ## 📥 Inputs
 
-| Input                      | Description                                                           | Required |         Default          |
-| :------------------------- | :-------------------------------------------------------------------- | :------: | :----------------------: |
-| `op-service-account-token` | 1Password service account token with access to GitHub Actions secrets | **Yes**  |            -             |
-| `before-script`            | The command to run before creating the snapshot release               |    No    |           `''`           |
-| `build-script`             | The command to run the build script                                   |    No    |    `'pnpm run build'`    |
-| `changeset-bin`            | The command to run the Changesets CLI                                 |    No    | `'pnpx @changesets/cli'` |
-| `dist-tag`                 | The dist tag to publish the snapshot release under                    |    No    |         `'next'`         |
-| `publish-packages`         | Whether to publish packages to the registry                           |    No    |         `'true'`         |
+| Input                      | Description                                                                                                                          | Required |         Default          |
+| :------------------------- | :----------------------------------------------------------------------------------------------------------------------------------- | :------: | :----------------------: |
+| `op-service-account-token` | 1Password service account token with access to GitHub Actions secrets                                                                | **Yes**  |            -             |
+| `before-script`            | The command to run before creating the snapshot release                                                                              |    No    |           `''`           |
+| `build-script`             | The command to run the build script                                                                                                  |    No    |    `'pnpm run build'`    |
+| `changeset-bin`            | The command to run the Changesets CLI                                                                                                |    No    | `'pnpx @changesets/cli'` |
+| `publish-packages`         | Whether to publish packages to the registry                                                                                          |    No    |         `'true'`         |
+| `dist-tag`                 | The dist tag to publish the snapshot release under                                                                                   |    No    |         `'next'`         |
+| `is-release-pr`            | Indicates the workflow is running in a release PR                                                                                    |    No    |        `'false'`         |
+| `release-commit-message`   | The commit message that indicates a release commit, used to find the parent commit to build the snapshot release from in release PRs |    No    | `'chore(main): release'` |
 
 ## 📤 Outputs
 
@@ -72,6 +76,8 @@ _This action does not define any outputs._
   - Checks out the repository without credentials.
   - Sets up the Node.js project using [setup-project](./setup-project.md).
   - Runs the script specified in `before-script` if provided.
-  - Versionizes the codebase using Changeset snapshot command (`${{ inputs.changeset-bin }} version --snapshot ${{ inputs.dist-tag }}`).
+  - If `is-release-pr` is `'true'`, finds the latest commit with the message matching `release-commit-message`, and checks out its parent commit (where Changesets still exist before versioning).
+  - Versionizes the codebase using the Changeset snapshot command (`${{ inputs.changeset-bin }} version --snapshot ${{ inputs.dist-tag }}`).
   - Runs the build script (`${{ inputs.build-script }}`).
   - Publishes to the package registry (`${{ inputs.changeset-bin }} publish --tag ${{ inputs.dist-tag }} --no-git-tag`) if `publish-packages` is set to `"true"`.
+  - If `is-release-pr` is `'true'` and packages were published, comments on the release PR with the list of successfully published snapshot packages.
