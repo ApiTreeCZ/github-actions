@@ -11,6 +11,11 @@ inputs:
     default: 'write'
     required: false
 
+  permission-pull-requests:
+    description: 'The permission level for pull requests (repository) scope of the token (read or write)'
+    default: 'write'
+    required: false
+
 outputs:
   token:
     description: 'The generated GitHub App token for authentication with GitHub API and Git operations'
@@ -49,6 +54,7 @@ runs:
         client-id: ${{ steps.parse-secrets.outputs.CLIENT_ID }}
         private-key: ${{ steps.parse-secrets.outputs.PRIVATE_KEY }}
         permission-contents: ${{ inputs.permission-contents }}
+        permission-pull-requests: ${{ inputs.permission-pull-requests }}
 
     - name: Get GitHub App user ID
       id: get-user-id

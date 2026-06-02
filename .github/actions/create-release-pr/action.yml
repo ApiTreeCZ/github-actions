@@ -6,6 +6,11 @@ inputs:
     description: '1Password service account token with access to GitHub Actions secrets'
     required: true
 
+  before-script:
+    description: 'The command to run before creating the release PR'
+    required: false
+    default: ''
+
   changeset-bin:
     description: 'The command to run the Changesets CLI'
     required: false
@@ -64,6 +69,11 @@ runs:
 
     - name: Set up Node.js
       uses: ApiTreeCZ/github-actions/.github/actions/setup-node@main
+
+    - name: Run before script
+      if: ${{ inputs.before-script != '' }}
+      shell: bash
+      run: ${{ inputs.before-script }}
 
     - name: Create release versions
       shell: bash

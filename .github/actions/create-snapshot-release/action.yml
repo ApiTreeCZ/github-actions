@@ -6,6 +6,11 @@ inputs:
     description: '1Password service account token with access to GitHub Actions secrets'
     required: true
 
+  before-script:
+    description: 'The command to run before creating the snapshot release'
+    required: false
+    default: ''
+
   build-script:
     description: 'The command to run the build script'
     required: false
@@ -40,6 +45,11 @@ runs:
       uses: ApiTreeCZ/github-actions/.github/actions/setup-project@main
       with:
         op-service-account-token: ${{ inputs.op-service-account-token }}
+
+    - name: Run before script
+      if: ${{ inputs.before-script != '' }}
+      shell: bash
+      run: ${{ inputs.before-script }}
 
     - name: Build and publish snapshot release
       shell: bash
