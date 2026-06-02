@@ -41,7 +41,7 @@ runs:
       with:
         clean: true
         fetch-depth: 0
-        persist-credentials: false
+        persist-credentials: true
         token: ${{ steps.setup-git.outputs.token }}
 
     - name: Set up project
