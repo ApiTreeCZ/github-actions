@@ -37,7 +37,7 @@ runs:
         persist-credentials: false
 
     - name: Set up project
-      uses: ./.github/actions/setup-project
+      uses: ApiTreeCZ/github-actions/.github/actions/setup-project@main
       with:
         op-service-account-token: ${{ inputs.op-service-account-token }}
 

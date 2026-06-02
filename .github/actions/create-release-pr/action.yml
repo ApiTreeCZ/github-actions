@@ -68,7 +68,7 @@ runs:
 
     - name: Collect release info
       id: release-info
-      uses: ./.github/actions/collect-release-info
+      uses: ApiTreeCZ/github-actions/.github/actions/collect-release-info@main
 
     - name: Create release PR
       id: create-pr
