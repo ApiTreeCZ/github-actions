@@ -10,7 +10,7 @@ This composite action automatically runs [setup-node](./setup-node.md) to initia
 
 ```yaml
 - name: Set up project
-  uses: ApiTreeCZ/github-actions/.github/actions/setup-project@v0.4.0
+  uses: ApiTreeCZ/github-actions/.github/actions/setup-project@v0.5.0
   with:
     # Required inputs
     op-service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
@@ -33,7 +33,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Set up project
-        uses: ApiTreeCZ/github-actions/.github/actions/setup-project@v0.4.0
+        uses: ApiTreeCZ/github-actions/.github/actions/setup-project@v0.5.0
         with:
           op-service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
 ```
