@@ -48,3 +48,9 @@ runs:
       run: |
         TURBO_TEAM=$(echo "${GITHUB_REPOSITORY}" | cut -d '/' -f2)
         echo "TURBO_TEAM=$TURBO_TEAM" >>$GITHUB_ENV
+
+    - name: Disable Turbo telemetry
+      shell: bash
+      # language=bash
+      run: |
+        echo "TURBO_TELEMETRY_DISABLED=1" >>$GITHUB_ENV
