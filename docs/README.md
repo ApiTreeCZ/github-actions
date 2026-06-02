@@ -1,6 +1,4 @@
-# 📖 Documentation Entry Point
-
-Welcome to the documentation for **ApiTree's GitHub Actions and Workflows**.
+# 📖 ApiTree GitHub Actions Docs
 
 Here you will find detailed documentation on how to configure and reuse the customized GitHub Actions and Workflows hosted in this repository.
 
