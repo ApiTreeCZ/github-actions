@@ -52,8 +52,7 @@ runs:
     - name: Run before script
       if: ${{ inputs.before-script != '' }}
       shell: bash
-      run: |
-        ${{ inputs.before-script }}
+      run: ${{ inputs.before-script }}
 
     - name: Build and publish stable release
       shell: bash

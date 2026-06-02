@@ -73,8 +73,7 @@ runs:
     - name: Run before script
       if: ${{ inputs.before-script != '' }}
       shell: bash
-      run: |
-        ${{ inputs.before-script }}
+      run: ${{ inputs.before-script }}
 
     - name: Create release versions
       shell: bash
