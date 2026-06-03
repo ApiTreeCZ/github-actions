@@ -109,7 +109,7 @@ runs:
               } >> $GITHUB_OUTPUT
             fi
         else
-            echo "::warning::Skipping publish as \"publish-packages\" is set to false"
+            echo "::warning::Skipping publish as \"publish-packages\" is set to \"false\""
             echo 
         fi
 

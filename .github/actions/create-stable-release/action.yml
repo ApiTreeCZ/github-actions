@@ -63,7 +63,7 @@ runs:
         if [ "${{ inputs.publish-packages }}" == "true" ]; then
             ${{ inputs.changeset-bin }} publish
         else
-            echo "Skipping publish as \"publish-packages\" is set to false"
+            echo "Skipping publish as \"publish-packages\" is set to \"false\""
         fi
 
         git push --follow-tags
