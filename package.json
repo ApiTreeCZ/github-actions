@@ -14,7 +14,7 @@
     "test": "vitest run"
   },
   "devDependencies": {
-    "@apitree.cz/eslint-config": "2.1.0",
+    "@apitree.cz/eslint-config": "2.2.1",
     "@apitree.cz/lint-staged-config": "1.1.1",
     "@apitree.cz/prettier-config": "1.0.1",
     "@apitree.cz/vitest-config": "1.0.2",
