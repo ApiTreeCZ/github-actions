@@ -10,6 +10,8 @@
 
 </div>
 
+---
+
 ## Getting Started
 
 ### Prerequisites
