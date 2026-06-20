@@ -13,7 +13,7 @@ importers:
         version: 2.2.1(@typescript-eslint/eslint-plugin@8.60.1(@typescript-eslint/parser@8.60.1(eslint@9.39.4(jiti@2.6.1))(typescript@6.0.3))(eslint@9.39.4(jiti@2.6.1))(typescript@6.0.3))(eslint@9.39.4(jiti@2.6.1))(typescript@6.0.3)(vitest@4.1.8(@types/node@24.13.1)(jiti@2.6.1)(yaml@2.9.0))
       '@apitree.cz/lint-staged-config':
         specifier: 1.1.1
-        version: 1.1.1(lint-staged@17.0.7)
+        version: 1.1.1(lint-staged@17.0.8)
       '@apitree.cz/prettier-config':
         specifier: 1.0.1
         version: 1.0.1(prettier@3.8.4)
@@ -39,8 +39,8 @@ importers:
         specifier: 0.0.8
         version: 0.0.8
       lint-staged:
-        specifier: 17.0.7
-        version: 17.0.7
+        specifier: 17.0.8
+        version: 17.0.8
       prettier:
         specifier: 3.8.4
         version: 3.8.4
@@ -1770,8 +1770,8 @@ packages:
   lines-and-columns@1.2.4:
     resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==}
 
-  lint-staged@17.0.7:
-    resolution: {integrity: sha512-JrSobt+tW3rH8IOMi8tDZd3foorM5yPEkLD/V2NxobgHrFfHWGee4MOLVuZeScgxftEwbHrPHIFA/ZL+nUJeuA==}
+  lint-staged@17.0.8:
+    resolution: {integrity: sha512-B2P/d+jVW0UXOQ0MVMLrB/9ydA1P+zz6jYfdrbbEd9ur3S2rcbduFWKiUCC02Sm5hbC8nrm7y24WuYMG54HfxA==}
     engines: {node: '>=22.22.1'}
     hasBin: true
 
@@ -2463,9 +2463,9 @@ snapshots:
       - supports-color
       - vitest
 
-  '@apitree.cz/lint-staged-config@1.1.1(lint-staged@17.0.7)':
+  '@apitree.cz/lint-staged-config@1.1.1(lint-staged@17.0.8)':
     optionalDependencies:
-      lint-staged: 17.0.7
+      lint-staged: 17.0.8
 
   '@apitree.cz/prettier-config@1.0.1(prettier@3.8.4)':
     dependencies:
@@ -4141,7 +4141,7 @@ snapshots:
 
   lines-and-columns@1.2.4: {}
 
-  lint-staged@17.0.7:
+  lint-staged@17.0.8:
     dependencies:
       listr2: 10.2.1
       picomatch: 4.0.4
