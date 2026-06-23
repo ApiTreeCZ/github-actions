@@ -8,6 +8,8 @@ enablePrePostScripts: true
 
 engineStrict: true
 
+minimumReleaseAge: 1140
+
 saveExact: true
 
 strictPeerDependencies: true
