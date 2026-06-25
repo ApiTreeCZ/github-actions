@@ -41,7 +41,7 @@ runs:
         persist-credentials: false
 
     - name: Set up Node.js
-      uses: ApiTreeCZ/github-actions/.github/actions/setup-node@v0.5.2
+      uses: ApiTreeCZ/github-actions/.github/actions/setup-node@v0.6.0
 
     - name: Run before script
       if: ${{ inputs.before-script != '' }}

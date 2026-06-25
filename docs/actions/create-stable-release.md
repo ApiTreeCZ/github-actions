@@ -16,7 +16,7 @@ This composite action automatically configures Git using [setup-git](./setup-git
 
 ```yaml
 - name: Create stable release
-  uses: ApiTreeCZ/github-actions/.github/actions/create-stable-release@v0.5.2
+  uses: ApiTreeCZ/github-actions/.github/actions/create-stable-release@v0.6.0
   with:
     # Required inputs
     op-service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
@@ -40,7 +40,7 @@ jobs:
       id-token: write # Required for OIDC trusted publishing if `publish-packages` is `true`
     steps:
       - name: Create stable release
-        uses: ApiTreeCZ/github-actions/.github/actions/create-stable-release@v0.5.2
+        uses: ApiTreeCZ/github-actions/.github/actions/create-stable-release@v0.6.0
         with:
           op-service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
 ```
