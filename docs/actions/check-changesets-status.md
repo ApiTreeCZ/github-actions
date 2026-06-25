@@ -44,11 +44,15 @@ jobs:
 | :-------------- | :------------------------------------------------------- | :------: | :----------------------: |
 | `before-script` | The command to run before checking the Changesets status |    No    |           `''`           |
 | `changeset-bin` | The command to run the Changesets CLI                    |    No    | `'pnpx @changesets/cli'` |
-| `origin-ref`    | The Git ref to compare the changesets status against     |    No    |     `'origin/main'`      |
+| `origin-ref`    | The Git ref to compare the Changesets status against     |    No    |     `'origin/main'`      |
 
 ## 📤 Outputs
 
-_This action does not define any outputs._
+| Output             | Description                                               |
+| :----------------- | :-------------------------------------------------------- |
+| `result`           | Indicates whether there are Changesets present in the PR  |
+| `changeset-status` | The output of the Changesets status command               |
+| `since-ref`        | The Git ref used to compare the Changesets status against |
 
 ## 🛠️ Details
 

@@ -6,6 +6,16 @@ inputs:
     description: '1Password service account token with access to the vault containing ApiTree GitHub Actions app secrets'
     required: true
 
+  op-client-id-secret:
+    description: '1Password secret path for the ApiTree GitHub Actions app client ID'
+    default: 'apitree-infra/github-actions/CLIENT_ID'
+    required: false
+
+  op-private-key-secret:
+    description: '1Password secret path for the ApiTree GitHub Actions app private key'
+    default: 'apitree-infra/github-actions/private-key.pem'
+    required: false
+
   permission-contents:
     description: 'The permission level for contents (repository) scope of the token (read or write)'
     default: 'write'
@@ -38,8 +48,8 @@ runs:
       with:
         op-service-account-token: ${{ inputs.op-service-account-token }}
         secrets: |
-          CLIENT_ID=op://apitree-infra/github-actions/CLIENT_ID
-          PRIVATE_KEY=op://apitree-infra/github-actions/private-key.pem
+          CLIENT_ID=op://${{ inputs.op-client-id-secret }}
+          PRIVATE_KEY=op://${{ inputs.op-private-key-secret }}
 
     - name: Parse secrets JSON to outputs
       id: parse-secrets

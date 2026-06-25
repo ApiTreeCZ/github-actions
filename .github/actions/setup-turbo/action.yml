@@ -6,6 +6,21 @@ inputs:
     description: '1Password service account token with access to the vault containing Turbo secrets'
     required: true
 
+  op-turbo-api-secret:
+    description: '1Password secret path for the Turbo API URL'
+    default: 'apitree-infra/turbo-remote-cache/TURBO_API'
+    required: false
+
+  op-turbo-token-secret:
+    description: '1Password secret path for the Turbo token'
+    default: 'apitree-infra/turbo-remote-cache/TURBO_TOKEN'
+    required: false
+
+  op-turbo-remote-cache-signature-key-secret:
+    description: '1Password secret path for the Turbo signature key'
+    default: 'apitree-infra/turbo-remote-cache/TURBO_REMOTE_CACHE_SIGNATURE_KEY'
+    required: false
+
   dir:
     description: 'The directory to use for the Turbo cache'
     default: '.turbo'
@@ -38,9 +53,9 @@ runs:
         op-service-account-token: ${{ inputs.op-service-account-token }}
         export-env: 'true'
         secrets: |
-          TURBO_API=op://apitree-infra/turbo-remote-cache/TURBO_API
-          TURBO_TOKEN=op://apitree-infra/turbo-remote-cache/TURBO_TOKEN
-          TURBO_REMOTE_CACHE_SIGNATURE_KEY=op://apitree-infra/turbo-remote-cache/TURBO_REMOTE_CACHE_SIGNATURE_KEY
+          TURBO_API=op://${{ inputs.op-turbo-api-secret }}
+          TURBO_TOKEN=op://${{ inputs.op-turbo-token-secret }}
+          TURBO_REMOTE_CACHE_SIGNATURE_KEY=op://${{ inputs.op-turbo-remote-cache-signature-key-secret }}
 
     - name: Derive TURBO_TEAM from repository name
       shell: bash

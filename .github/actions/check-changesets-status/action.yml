@@ -13,9 +13,22 @@ inputs:
     default: 'pnpx @changesets/cli'
 
   origin-ref:
-    description: 'The Git ref to compare the changesets status against'
+    description: 'The Git ref to compare the Changesets status against'
     required: false
     default: 'origin/main'
+
+outputs:
+  result:
+    description: Indicates whether there are Changesets present in the PR
+    value: ${{ steps.changesets.outputs.result }}
+
+  changeset-status:
+    description: The output of the Changesets status command
+    value: ${{ steps.changesets.outputs.changeset-status }}
+
+  since-ref:
+    description: The Git ref used to compare the Changesets status against
+    value: ${{ steps.changesets.outputs.since-ref }}
 
 runs:
   using: composite
@@ -66,7 +79,7 @@ runs:
           echo "since-ref=$SINCE_REF"
         } >> $GITHUB_OUTPUT
 
-    - name: Add success message about changesets
+    - name: Add success message about Changesets
       if: steps.changesets.outputs.result == 'true'
       uses: thollander/actions-comment-pull-request@v3
       with:
@@ -83,16 +96,16 @@ runs:
           ${{ steps.changesets.outputs.changeset-status }}
           ```
 
-    - name: Add warning about missing changesets
-      if: steps.changesets.outputs.result == 'false'
+    - name: Add warning about missing Changesets
+      if: steps.changesets.outputs.result == 'false' && github.event_name == 'pull_request'
       uses: thollander/actions-comment-pull-request@v3
       with:
         comment-tag: changesets
         # language=md
         message: |
-          ### ⚠️ No changesets found
+          ### ⚠️ No Changesets found
 
-          Run `${{ inputs.changeset-bin }} add` to create a changeset for this PR if changes in it should result in a
+          Run `${{ inputs.changeset-bin }} add` to create a Changeset for this PR if changes in it should result in a
           version bump for any package.
 
           **If this PR should not result in any version bumps, then we are good to go 👌**
