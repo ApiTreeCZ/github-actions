@@ -44,9 +44,9 @@ Read all `.github/actions/*/action.yml` files and all `.github/workflows/*.yml` 
    ```bash
    git commit -m "chore(release): vX.Y.Z"
    ```
-3. **Create a git tag**:
+3. **Create a signed tag**:
    ```bash
-   git tag -a "vX.Y.Z" -m "Release vX.Y.Z"
+   git tag -s vX.Y.Z -m "Release vX.Y.Z"
    ```
 4. **Push to remote**:
    ```bash
