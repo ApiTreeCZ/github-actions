@@ -16,7 +16,7 @@ importers:
         version: 1.1.1(lint-staged@17.0.8)
       '@apitree.cz/prettier-config':
         specifier: 1.0.1
-        version: 1.0.1(prettier@3.8.4)
+        version: 1.0.1(prettier@3.9.4)
       '@apitree.cz/vitest-config':
         specifier: 1.0.2
         version: 1.0.2(@types/node@24.13.2)(jiti@2.6.1)(vitest@4.1.9(@types/node@24.13.2)(jiti@2.6.1)(yaml@2.9.0))(yaml@2.9.0)
@@ -42,8 +42,8 @@ importers:
         specifier: 17.0.8
         version: 17.0.8
       prettier:
-        specifier: 3.8.4
-        version: 3.8.4
+        specifier: 3.9.4
+        version: 3.9.4
       typescript:
         specifier: 6.0.3
         version: 6.0.3
@@ -1338,6 +1338,7 @@ packages:
   git-raw-commits@5.0.1:
     resolution: {integrity: sha512-Y+csSm2GD/PCSh6Isd/WiMjNAydu0VBiG9J7EdQsNA5P9uXvLayqjmTsNlK5Gs9IhblFZqOU0yid5Il5JPoLiQ==}
     engines: {node: '>=18'}
+    deprecated: Deprecated and no longer maintained. Use @conventional-changelog/git-client instead.
     hasBin: true
 
   glob-parent@6.0.2:
@@ -1849,8 +1850,8 @@ packages:
       prettier:
         optional: true
 
-  prettier@3.8.4:
-    resolution: {integrity: sha512-N2MylSdi48+5N/6S5j+maeHbUSIzzZ5uOcX5Hm4QpV8Dkb1HFjfAKTKX6yNPJQD9AhcT3ifHNB66tWTTJDi11Q==}
+  prettier@3.9.4:
+    resolution: {integrity: sha512-yWG/o/4oJfo036EKAfK6ACAoDOfHeRHx4tuxkfBZiauURiaSmYwlpOr5LQqKtIkRD2z1PLteme2WoxEnj4tHTg==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -2313,10 +2314,10 @@ snapshots:
     optionalDependencies:
       lint-staged: 17.0.8
 
-  '@apitree.cz/prettier-config@1.0.1(prettier@3.8.4)':
+  '@apitree.cz/prettier-config@1.0.1(prettier@3.9.4)':
     dependencies:
-      prettier: 3.8.4
-      prettier-plugin-packagejson: 3.0.2(prettier@3.8.4)
+      prettier: 3.9.4
+      prettier-plugin-packagejson: 3.0.2(prettier@3.9.4)
 
   '@apitree.cz/vitest-config@1.0.2(@types/node@24.13.2)(jiti@2.6.1)(vitest@4.1.9(@types/node@24.13.2)(jiti@2.6.1)(yaml@2.9.0))(yaml@2.9.0)':
     dependencies:
@@ -4111,13 +4112,13 @@ snapshots:
 
   prelude-ls@1.2.1: {}
 
-  prettier-plugin-packagejson@3.0.2(prettier@3.8.4):
+  prettier-plugin-packagejson@3.0.2(prettier@3.9.4):
     dependencies:
       sort-package-json: 3.6.1
     optionalDependencies:
-      prettier: 3.8.4
+      prettier: 3.9.4
 
-  prettier@3.8.4: {}
+  prettier@3.9.4: {}
 
   punycode@2.3.1: {}
 
