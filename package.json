@@ -18,7 +18,7 @@
     "@apitree.cz/lint-staged-config": "1.1.1",
     "@apitree.cz/prettier-config": "1.0.1",
     "@apitree.cz/vitest-config": "1.0.2",
-    "@commitlint/cli": "21.2.0",
+    "@commitlint/cli": "21.2.1",
     "@commitlint/config-conventional": "21.2.0",
     "@types/node": "24.13.2",
     "eslint": "9.39.4",
