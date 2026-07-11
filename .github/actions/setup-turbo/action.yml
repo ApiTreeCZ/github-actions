@@ -47,7 +47,7 @@ runs:
         restore-keys: ${{ inputs.restore-keys }}
 
     - name: Load Turbo secrets
-      uses: ApiTreeCZ/github-actions/.github/actions/load-secrets@v0.6.0
+      uses: ApiTreeCZ/github-actions/.github/actions/load-secrets@v0.6.1
       id: load-secrets
       with:
         op-service-account-token: ${{ inputs.op-service-account-token }}
