@@ -61,9 +61,10 @@ runs:
         ${{ inputs.build-script }}
 
         if [ "${{ inputs.publish-packages }}" == "true" ]; then
-            ${{ inputs.changeset-bin }} publish
+            ${{ inputs.changeset-bin }} publish --no-git-tag
         else
             echo "Skipping publish as \"publish-packages\" is set to \"false\""
         fi
 
+        ${{ inputs.changeset-bin }} tag
         git push --follow-tags
