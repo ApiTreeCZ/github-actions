@@ -12,8 +12,8 @@ importers:
         specifier: 2.2.2
         version: 2.2.2(@typescript-eslint/eslint-plugin@8.63.0(@typescript-eslint/parser@8.63.0(eslint@9.39.5(jiti@2.6.1))(typescript@6.0.3))(eslint@9.39.5(jiti@2.6.1))(typescript@6.0.3))(eslint@9.39.5(jiti@2.6.1))(typescript@6.0.3)(vitest@4.1.10(@types/node@24.13.3)(jiti@2.6.1)(yaml@2.9.0))
       '@apitree.cz/lint-staged-config':
-        specifier: 1.1.1
-        version: 1.1.1(lint-staged@17.0.8)
+        specifier: 1.1.2
+        version: 1.1.2(lint-staged@17.0.8)
       '@apitree.cz/prettier-config':
         specifier: 1.0.2
         version: 1.0.2(prettier@3.9.5)
@@ -59,8 +59,8 @@ packages:
       eslint: ^9.39.0
       typescript: ^5.9.3 || ^6.0.2
 
-  '@apitree.cz/lint-staged-config@1.1.1':
-    resolution: {integrity: sha512-uvy5L8KuvQPaObsw39YwR9rHB5MqKsETeL8mkfe/8bmFTxym662SSRR3kj9sUQG+6jDZHP8PpBT1L6UfSGEY4g==}
+  '@apitree.cz/lint-staged-config@1.1.2':
+    resolution: {integrity: sha512-vW15emNmmB2ysGqLp0um3y4vjtROMXY4/+bxn9y7Sl60PLze6Vspa00zHlJNfdG1ZCjhS0CXu5/urWy4RoFj8A==}
     peerDependencies:
       lint-staged: ^16.1.0 || ^17.0.0
     peerDependenciesMeta:
@@ -2286,7 +2286,7 @@ snapshots:
       - supports-color
       - vitest
 
-  '@apitree.cz/lint-staged-config@1.1.1(lint-staged@17.0.8)':
+  '@apitree.cz/lint-staged-config@1.1.2(lint-staged@17.0.8)':
     optionalDependencies:
       lint-staged: 17.0.8
 
