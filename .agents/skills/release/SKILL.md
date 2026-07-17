@@ -50,8 +50,8 @@ Read all `.github/actions/*/action.yml` files and all `.github/workflows/*.yml` 
    ```
 4. **Push to remote**:
    ```bash
-   git push origin main
    git push origin vX.Y.Z
+   git push origin main
    ```
 
 ## Confirmation
