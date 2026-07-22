@@ -16,7 +16,7 @@ importers:
         version: 1.1.2(lint-staged@17.1.0)
       '@apitree.cz/prettier-config':
         specifier: 1.0.2
-        version: 1.0.2(prettier@3.9.5)
+        version: 1.0.2(prettier@3.9.6)
       '@apitree.cz/vitest-config':
         specifier: 1.0.3
         version: 1.0.3(@types/node@24.13.3)(jiti@2.6.1)(vitest@4.1.10(@types/node@24.13.3)(jiti@2.6.1)(yaml@2.9.0))(yaml@2.9.0)
@@ -42,8 +42,8 @@ importers:
         specifier: 17.1.0
         version: 17.1.0
       prettier:
-        specifier: 3.9.5
-        version: 3.9.5
+        specifier: 3.9.6
+        version: 3.9.6
       typescript:
         specifier: 6.0.3
         version: 6.0.3
@@ -1915,8 +1915,8 @@ packages:
       prettier:
         optional: true
 
-  prettier@3.9.5:
-    resolution: {integrity: sha512-/FVl766LpUfB5vXgCYOYa0MeV/441Ia99AeICQIQFTY/Nw0roZwULcXpku5i1/m5kt/baz+s4Zogspd839HSMg==}
+  prettier@3.9.6:
+    resolution: {integrity: sha512-OpN0zzVdiaiAhxpuuj5efpIS4sY9j7bY6uR5mnj5yPzGkdkjNKSJeUThPb60Jw29QuAZgA4o+/iB49kFiaBX6g==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -2396,10 +2396,10 @@ snapshots:
     optionalDependencies:
       lint-staged: 17.1.0
 
-  '@apitree.cz/prettier-config@1.0.2(prettier@3.9.5)':
+  '@apitree.cz/prettier-config@1.0.2(prettier@3.9.6)':
     dependencies:
-      prettier: 3.9.5
-      prettier-plugin-packagejson: 3.0.2(prettier@3.9.5)
+      prettier: 3.9.6
+      prettier-plugin-packagejson: 3.0.2(prettier@3.9.6)
 
   '@apitree.cz/vitest-config@1.0.3(@types/node@24.13.3)(jiti@2.6.1)(vitest@4.1.10(@types/node@24.13.3)(jiti@2.6.1)(yaml@2.9.0))(yaml@2.9.0)':
     dependencies:
@@ -4213,13 +4213,13 @@ snapshots:
 
   prelude-ls@1.2.1: {}
 
-  prettier-plugin-packagejson@3.0.2(prettier@3.9.5):
+  prettier-plugin-packagejson@3.0.2(prettier@3.9.6):
     dependencies:
       sort-package-json: 3.6.1
     optionalDependencies:
-      prettier: 3.9.5
+      prettier: 3.9.6
 
-  prettier@3.9.5: {}
+  prettier@3.9.6: {}
 
   punycode@2.3.1: {}
 
