@@ -34,9 +34,9 @@ This workflow does not accept any inputs.
 
 ## 🔑 Secrets
 
-| Secret                                   | Description                                                                    |
-| :--------------------------------------- | :----------------------------------------------------------------------------- |
-| `OP_APITREE_INFRA_SERVICE_ACCOUNT_TOKEN` | 1Password service account token for loading secrets and setting up the project |
+| Secret                                   | Description                                                           |
+| :--------------------------------------- | :-------------------------------------------------------------------- |
+| `OP_APITREE_INFRA_SERVICE_ACCOUNT_TOKEN` | 1Password service account token with access to GitHub Actions secrets |
 
 ## 📤 Outputs
 

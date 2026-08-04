@@ -5,6 +5,10 @@ on:
     branches:
       - main
   workflow_call:
+    secrets:
+      OP_APITREE_INFRA_SERVICE_ACCOUNT_TOKEN:
+        description: '1Password service account token with access to GitHub Actions secrets'
+        required: true
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
