@@ -7,7 +7,8 @@ inputs:
     required: true
   output-cmd:
     description: 'Command to run after Copilot finishes to map the result to an output variable'
-    required: true
+    required: false
+    default: ''
   args:
     description: 'Additional arguments to pass to the Copilot CLI (e.g. --allow-tool=shell(git:*) --allow-tool=write)'
     required: false
@@ -30,5 +31,6 @@ runs:
       shell: bash
 
     - name: Process Copilot output
+      if: ${{ inputs.output-cmd != '' }}
       run: ${{ inputs.output-cmd }}
       shell: bash

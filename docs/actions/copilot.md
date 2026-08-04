@@ -44,11 +44,12 @@ jobs:
 
 ## 📥 Inputs
 
-| Input    | Description                                      | Required |             Default              |
-| :------- | :----------------------------------------------- | :------: | :------------------------------: |
-| `prompt` | The prompt to pass to the Copilot CLI            | **Yes**  |                -                 |
-| `args`   | Additional CLI flags (e.g. `--allow-tool=write`) |    No    |               `''`               |
-| `token`  | GitHub token for Copilot authentication          |    No    | `${{ github.token }}` (implicit) |
+| Input        | Description                                                                   | Required |             Default              |
+| :----------- | :---------------------------------------------------------------------------- | :------: | :------------------------------: |
+| `prompt`     | The prompt to pass to the Copilot CLI                                         | **Yes**  |                -                 |
+| `args`       | Additional CLI flags (e.g. `--allow-tool=write`)                              |    No    |               `''`               |
+| `output-cmd` | Command to run after Copilot finishes to map the result to an output variable |    No    |               `''`               |
+| `token`      | GitHub token for Copilot authentication                                       |    No    | `${{ github.token }}` (implicit) |
 
 ## 📤 Outputs
 
