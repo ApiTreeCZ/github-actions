@@ -37,15 +37,15 @@ jobs:
 
       - name: Check unreleased Changesets
         id: check-unreleased-changesets
-        uses: ApiTreeCZ/github-actions/.github/actions/check-unreleased-changesets@v0.6.2
+        uses: ApiTreeCZ/github-actions/.github/actions/check-unreleased-changesets@v0.6.3
 
       - name: Check stable release
         id: check-stable-release
-        uses: ApiTreeCZ/github-actions/.github/actions/check-stable-release@v0.6.2
+        uses: ApiTreeCZ/github-actions/.github/actions/check-stable-release@v0.6.3
 
       - name: Check release PR
         id: check-release-pr
-        uses: ApiTreeCZ/github-actions/.github/actions/check-release-pr@v0.6.2
+        uses: ApiTreeCZ/github-actions/.github/actions/check-release-pr@v0.6.3
 
       - name: Should release
         id: should-release

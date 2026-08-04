@@ -8,7 +8,7 @@ Automatically approves Renovate bot dependency update pull requests using GitHub
 
 ```yaml
 copilot:
-  uses: ApiTreeCZ/github-actions/.github/workflows/copilot.yml@v0.6.2
+  uses: ApiTreeCZ/github-actions/.github/workflows/copilot.yml@v0.6.3
   secrets:
     OP_APITREE_INFRA_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_APITREE_INFRA_SERVICE_ACCOUNT_TOKEN }}
 ```
@@ -20,7 +20,7 @@ Include this reusable workflow in your CI to auto-approve safe dependency update
 ```yaml
 jobs:
   copilot:
-    uses: ApiTreeCZ/github-actions/.github/workflows/copilot.yml@v0.6.2
+    uses: ApiTreeCZ/github-actions/.github/workflows/copilot.yml@v0.6.3
     secrets:
       OP_APITREE_INFRA_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_APITREE_INFRA_SERVICE_ACCOUNT_TOKEN }}
     env:

@@ -8,7 +8,7 @@ Preflight checks that determine if the release process should proceed by validat
 
 ```yaml
 preflight:
-  uses: ApiTreeCZ/github-actions/.github/workflows/preflight.yml@v0.6.2
+  uses: ApiTreeCZ/github-actions/.github/workflows/preflight.yml@v0.6.3
 ```
 
 ### Workflow Example
@@ -18,7 +18,7 @@ Here is how you call this reusable workflow and use its outputs to conditionally
 ```yaml
 jobs:
   preflight:
-    uses: ApiTreeCZ/github-actions/.github/workflows/preflight.yml@v0.6.2
+    uses: ApiTreeCZ/github-actions/.github/workflows/preflight.yml@v0.6.3
 
   release:
     needs: preflight

@@ -8,7 +8,7 @@ Set up [Node.js](https://nodejs.org/en) with [pnpm](https://pnpm.io/) as the pac
 
 ```yaml
 - name: Set up Node.js
-  uses: ApiTreeCZ/github-actions/.github/actions/setup-node@v0.6.2
+  uses: ApiTreeCZ/github-actions/.github/actions/setup-node@v0.6.3
 ```
 
 ### Job Example
@@ -24,7 +24,7 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Set up Node.js
-        uses: ApiTreeCZ/github-actions/.github/actions/setup-node@v0.6.2
+        uses: ApiTreeCZ/github-actions/.github/actions/setup-node@v0.6.3
 
       - name: Install dependencies
         run: pnpm install

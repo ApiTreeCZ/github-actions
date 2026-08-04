@@ -10,7 +10,7 @@ This action runs `changeset status --since=<origin-ref>` to determine if the cha
 
 ```yaml
 - name: Check Changesets Status
-  uses: ApiTreeCZ/github-actions/.github/actions/check-changesets-status@v0.6.2
+  uses: ApiTreeCZ/github-actions/.github/actions/check-changesets-status@v0.6.3
   with:
     # Optional inputs (uncomment if needed)
     # before-script: ''
@@ -35,7 +35,7 @@ jobs:
           fetch-depth: 0
 
       - name: Check Changesets status
-        uses: ApiTreeCZ/github-actions/.github/actions/check-changesets-status@v0.6.2
+        uses: ApiTreeCZ/github-actions/.github/actions/check-changesets-status@v0.6.3
 ```
 
 ## 📥 Inputs
