@@ -35,7 +35,7 @@ runs:
 
     - name: Load secrets from 1Password
       id: load-secrets
-      uses: 1password/load-secrets-action@v4
+      uses: 1password/load-secrets-action@v5
       env:
         OP_SERVICE_ACCOUNT_TOKEN: ${{ inputs.op-service-account-token }}
         OP_ENV_FILE: ${{ inputs.op-env-file }}
