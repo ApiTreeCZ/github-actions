@@ -25,7 +25,7 @@ jobs:
       OP_APITREE_INFRA_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_APITREE_INFRA_SERVICE_ACCOUNT_TOKEN }}
     env:
       # Optional override of the default pattern for CI checks to wait for before Copilot approval.
-      WAIT_FOR_CHECKS_MATCH_PATTERN: '^(build|test|lint)'
+      WAIT_FOR_CHECKS_MATCH_PATTERN: '^(build|lint|test)$'
 ```
 
 ## 📥 Inputs
