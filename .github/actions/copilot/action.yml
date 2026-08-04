@@ -1,0 +1,34 @@
+name: Run Copilot CLI
+description: Run @github/copilot CLI programmatically in a workflow and process the output
+
+inputs:
+  prompt:
+    description: 'Prompt to pass to the Copilot CLI'
+    required: true
+  output-cmd:
+    description: 'Command to run after Copilot finishes to map the result to an output variable'
+    required: true
+  args:
+    description: 'Additional arguments to pass to the Copilot CLI (e.g. --allow-tool=shell(git:*) --allow-tool=write)'
+    required: false
+    default: ''
+  token:
+    description: 'GitHub token for Copilot authentication'
+    required: false
+    default: ${{ github.token }}
+
+runs:
+  using: composite
+  steps:
+    - name: Set up Node.js
+      uses: ApiTreeCZ/github-actions/.github/actions/setup-node@v0.6.1
+
+    - name: Run Copilot CLI
+      env:
+        COPILOT_GITHUB_TOKEN: ${{ inputs.token }}
+      run: pnpx @github/copilot -p "${{ inputs.prompt }}" ${{ inputs.args }} --no-ask-user
+      shell: bash
+
+    - name: Process Copilot output
+      run: ${{ inputs.output-cmd }}
+      shell: bash
