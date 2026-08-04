@@ -58,4 +58,8 @@ This action does not define explicit outputs. Use `output-cmd` to write results 
 
 - **Type**: `composite`
 - **Runs on**: `ubuntu-latest`, `macos-latest`, `windows-latest`
-- **Dependencies**: `ApiTreeCZ/github-actions/.github/actions/setup-node@main` (for Node.js + pnpm; `pnpx` invokes `@github/copilot`)
+- **Dependencies**: [setup-node](./setup-node.md)
+- **Under the hood**:
+  - Sets up Node.js and pnpm using [setup-node](./setup-node.md).
+  - Invokes `@github/copilot` via `pnpx` with the given prompt and arguments.
+  - Runs the `output-cmd` after Copilot finishes to process results.
