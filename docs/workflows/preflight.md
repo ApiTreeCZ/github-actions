@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       # Add your release steps here
 ```
@@ -52,7 +52,7 @@ This workflow does not require any secrets.
 
 - **Runs on**: `ubuntu-latest`
 - **Dependencies**:
-  - `actions/checkout@v6`
+  - `actions/checkout@v7`
   - [`check-unreleased-changesets`](../actions/check-unreleased-changesets.md)
   - [`check-stable-release`](../actions/check-stable-release.md)
   - [`check-release-pr`](../actions/check-release-pr.md)

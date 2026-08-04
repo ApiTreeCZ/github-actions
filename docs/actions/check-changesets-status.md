@@ -30,7 +30,7 @@ jobs:
       pull-requests: write # Required to comment on pull requests
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 

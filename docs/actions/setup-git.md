@@ -37,7 +37,7 @@ jobs:
           permission-contents: 'write' # Optional, defaults to 'write'
 
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           token: ${{ steps.setup-git.outputs.token }}
 
