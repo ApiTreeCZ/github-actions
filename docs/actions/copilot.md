@@ -8,7 +8,7 @@ Runs the `@github/copilot` CLI programmatically in a workflow step. Installs the
 
 ```yaml
 - name: Run Copilot CLI
-  uses: ApiTreeCZ/github-actions/.github/actions/copilot@v0.6.3
+  uses: ApiTreeCZ/github-actions/.github/actions/copilot@v0.6.4
   with:
     prompt: 'Summarize the changes in this PR'
     output-cmd: 'cat summary.md >> "$GITHUB_STEP_SUMMARY"'
@@ -35,7 +35,7 @@ jobs:
           fetch-depth: 0
 
       - name: Run Copilot CLI
-        uses: ApiTreeCZ/github-actions/.github/actions/copilot@v0.6.3
+        uses: ApiTreeCZ/github-actions/.github/actions/copilot@v0.6.4
         with:
           prompt: 'Review the git log and write a bullet-point summary of today changes to summary.md'
           output-cmd: 'cat summary.md >> "$GITHUB_STEP_SUMMARY"'
