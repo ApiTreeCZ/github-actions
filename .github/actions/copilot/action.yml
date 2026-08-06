@@ -6,7 +6,7 @@ inputs:
     description: 'Prompt to pass to the Copilot CLI'
     required: true
   output-cmd:
-    description: 'Command to run after Copilot finishes to map the result to an output variable'
+    description: 'Command to run after Copilot finishes to process its result (e.g. write to $GITHUB_STEP_SUMMARY or $GITHUB_OUTPUT)'
     required: false
     default: ''
   args:
@@ -27,7 +27,19 @@ runs:
     - name: Run Copilot CLI
       env:
         COPILOT_GITHUB_TOKEN: ${{ inputs.token }}
-      run: pnpx @github/copilot -p "${{ inputs.prompt }}" ${{ inputs.args }} --no-ask-user
+        # The prompt is data, not shell source: passing it through the environment
+        # keeps backticks, $(...) and quotes in it from being expanded by bash.
+        COPILOT_PROMPT: ${{ inputs.prompt }}
+        # Copilot matches `--allow-tool=shell(<cmd>:*)` rules against the command
+        # name, so a command the model prefixes with `PAGER=cat ...` matches no
+        # rule and is denied outright under `--no-ask-user`. Disable paging here
+        # so the model never has a reason to add such a prefix.
+        PAGER: cat
+        GH_PAGER: cat
+        GIT_PAGER: cat
+      # `args` is interpolated on purpose: it carries CLI flags that the shell has
+      # to word-split and unquote before Copilot sees them.
+      run: pnpm dlx @github/copilot -p "$COPILOT_PROMPT" ${{ inputs.args }} --no-ask-user
       shell: bash
 
     - name: Process Copilot output

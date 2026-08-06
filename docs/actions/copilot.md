@@ -44,12 +44,12 @@ jobs:
 
 ## 📥 Inputs
 
-| Input        | Description                                                                   | Required |             Default              |
-| :----------- | :---------------------------------------------------------------------------- | :------: | :------------------------------: |
-| `prompt`     | The prompt to pass to the Copilot CLI                                         | **Yes**  |                -                 |
-| `args`       | Additional CLI flags (e.g. `--allow-tool=write`)                              |    No    |               `''`               |
-| `output-cmd` | Command to run after Copilot finishes to map the result to an output variable |    No    |               `''`               |
-| `token`      | GitHub token for Copilot authentication                                       |    No    | `${{ github.token }}` (implicit) |
+| Input        | Description                                                 | Required |             Default              |
+| :----------- | :---------------------------------------------------------- | :------: | :------------------------------: |
+| `prompt`     | The prompt to pass to the Copilot CLI                       | **Yes**  |                -                 |
+| `args`       | Additional CLI flags (e.g. `--allow-tool=write`)            |    No    |               `''`               |
+| `output-cmd` | Command to run after Copilot finishes to process its result |    No    |               `''`               |
+| `token`      | GitHub token for Copilot authentication                     |    No    | `${{ github.token }}` (implicit) |
 
 ## 📤 Outputs
 
@@ -62,5 +62,12 @@ This action does not define explicit outputs. Use `output-cmd` to write results 
 - **Dependencies**: [setup-node](./setup-node.md)
 - **Under the hood**:
   - Sets up Node.js and pnpm using [setup-node](./setup-node.md).
-  - Invokes `@github/copilot` via `pnpx` with the given prompt and arguments.
+  - Invokes `@github/copilot` via `pnpm dlx` with the given prompt and arguments.
   - Runs the `output-cmd` after Copilot finishes to process results.
+
+## ⚠️ Notes
+
+- `prompt` is passed to the CLI through an environment variable, so backticks, `$(...)` and quotes inside it are sent verbatim instead of being expanded by the shell.
+- `args` is expanded straight into the command line, so quote any flag containing shell metacharacters: `args: "--allow-tool='shell(gh:*)'"`.
+- Copilot runs with `--no-ask-user`, so every tool it may use has to be allow-listed via `args`. A `shell(<cmd>:*)` rule is matched against the command name, so commands prefixed with an environment variable assignment (`PAGER=cat gh ...`) match no rule and fail with `Permission denied and could not request permission from user`. The action already exports `PAGER`, `GH_PAGER` and `GIT_PAGER` as `cat` to remove the most common reason for such a prefix.
+- The `token` input only authenticates Copilot itself and must carry the **Copilot Requests** permission. Tools that Copilot invokes (e.g. `gh`) use whatever credentials the runner already has.

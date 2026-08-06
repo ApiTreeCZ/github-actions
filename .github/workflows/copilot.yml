@@ -77,3 +77,5 @@ jobs:
             - The PR contains only dependency updates (no other code changes).
             - All version updates are non-major (i.e., no breaking changes).
             If the PR meets the conditions, approve it via `gh` CLI. Do nothing if it does not meet the conditions.
+            Run `gh` and `git` as plain commands: never prefix a command with an environment variable assignment
+            (e.g. `PAGER=cat gh ...`), because only bare `gh`/`git` commands are allowed to run here.
