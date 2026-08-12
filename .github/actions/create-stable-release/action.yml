@@ -19,7 +19,7 @@ inputs:
   changeset-bin:
     description: 'The command to run the Changesets CLI'
     required: false
-    default: 'pnpx @changesets/cli'
+    default: 'pnpx @changesets/cli@2.31.1'
 
   publish-packages:
     description: 'Whether to publish packages to the registry'

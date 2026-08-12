@@ -14,7 +14,7 @@ inputs:
   turbo-bin:
     description: 'The command to run the Turbo CLI'
     required: false
-    default: 'pnpx turbo'
+    default: 'pnpx turbo@2.10.9'
 
 runs:
   using: composite
