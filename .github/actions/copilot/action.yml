@@ -22,7 +22,7 @@ runs:
   using: composite
   steps:
     - name: Set up Node.js
-      uses: ApiTreeCZ/github-actions/.github/actions/setup-node@v0.6.4
+      uses: ApiTreeCZ/github-actions/.github/actions/setup-node@v0.6.5
 
     - name: Run Copilot CLI
       env:

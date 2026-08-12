@@ -20,11 +20,11 @@ runs:
   using: composite
   steps:
     - name: Set up Node.js
-      uses: ApiTreeCZ/github-actions/.github/actions/setup-node@v0.6.4
+      uses: ApiTreeCZ/github-actions/.github/actions/setup-node@v0.6.5
 
     - name: Set up Turbo
       if: ${{ inputs.use-turbo == 'true' }}
-      uses: ApiTreeCZ/github-actions/.github/actions/setup-turbo@v0.6.4
+      uses: ApiTreeCZ/github-actions/.github/actions/setup-turbo@v0.6.5
       with:
         op-service-account-token: ${{ inputs.op-service-account-token }}
 

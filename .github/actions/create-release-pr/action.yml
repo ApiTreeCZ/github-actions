@@ -54,7 +54,7 @@ runs:
   steps:
     - name: Set up Git
       id: setup-git
-      uses: ApiTreeCZ/github-actions/.github/actions/setup-git@v0.6.4
+      uses: ApiTreeCZ/github-actions/.github/actions/setup-git@v0.6.5
       with:
         op-service-account-token: ${{ inputs.op-service-account-token }}
         permission-contents: 'write'
@@ -68,7 +68,7 @@ runs:
         token: ${{ steps.setup-git.outputs.token }}
 
     - name: Set up project
-      uses: ApiTreeCZ/github-actions/.github/actions/setup-project@v0.6.4
+      uses: ApiTreeCZ/github-actions/.github/actions/setup-project@v0.6.5
       with:
         op-service-account-token: ${{ inputs.op-service-account-token }}
 
@@ -83,7 +83,7 @@ runs:
 
     - name: Collect release info
       id: release-info
-      uses: ApiTreeCZ/github-actions/.github/actions/collect-release-info@v0.6.4
+      uses: ApiTreeCZ/github-actions/.github/actions/collect-release-info@v0.6.5
 
     - name: Create release PR
       id: create-pr

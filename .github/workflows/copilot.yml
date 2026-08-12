@@ -45,7 +45,7 @@ jobs:
 
       - name: Load secrets
         id: load-secrets
-        uses: ApiTreeCZ/github-actions/.github/actions/load-secrets@v0.6.4
+        uses: ApiTreeCZ/github-actions/.github/actions/load-secrets@v0.6.5
         with:
           op-service-account-token: ${{ secrets.OP_APITREE_INFRA_SERVICE_ACCOUNT_TOKEN }}
           secrets: |
@@ -53,7 +53,7 @@ jobs:
 
       - name: Parse secrets
         id: parse-secrets
-        uses: ApiTreeCZ/github-actions/.github/actions/json-to-outputs@v0.6.4
+        uses: ApiTreeCZ/github-actions/.github/actions/json-to-outputs@v0.6.5
         with:
           json: ${{ steps.load-secrets.outputs.secrets }}
 
@@ -64,7 +64,7 @@ jobs:
 
       - name: Prompt Copilot to auto-approve the PR
         id: copilot
-        uses: ApiTreeCZ/github-actions/.github/actions/copilot@v0.6.4
+        uses: ApiTreeCZ/github-actions/.github/actions/copilot@v0.6.5
         with:
           args: "--allow-tool='shell(gh:*)' --allow-tool='shell(git:*)'"
           prompt: |

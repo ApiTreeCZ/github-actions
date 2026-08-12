@@ -1,6 +1,6 @@
 {
   "name": "@apitree.cz/github-actions",
-  "version": "0.6.4",
+  "version": "0.6.5",
   "private": true,
   "description": "Reusable GitHub Actions for ApiTree projects",
   "license": "MIT",
