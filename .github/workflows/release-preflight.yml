@@ -1,4 +1,4 @@
-name: Preflight
+name: Release Preflight
 
 on:
   workflow_call:

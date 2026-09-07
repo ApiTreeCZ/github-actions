@@ -13,7 +13,7 @@ This repository contains reusable GitHub Actions and Workflows for ApiTree proje
 Each action is placed in its own folder under `.github/actions/` (e.g., `.github/actions/[name]/`).
 
 - `.github/actions/[name]/`: Folders containing composite GitHub Actions (each with an `action.yml`).
-- `.github/workflows/`: Reusable workflows and repository CI workflows (like `preflight.yml` and `ci.yml`).
+- `.github/workflows/`: Reusable workflows and repository CI workflows (like `release-preflight.yml` and `ci.yml`).
 - `docs/actions/[name].md`: Individual documentation files for each action.
 - `docs/workflows/[name].md`: Individual documentation files for each reusable workflow.
 - `docs/README.md`: Entry point documenting and linking all actions and workflows.

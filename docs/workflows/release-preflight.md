@@ -1,4 +1,4 @@
-# 🔄 `preflight`
+# 🔄 `release-preflight`
 
 Preflight checks that determine if the release process should proceed by validating Changesets, release PR status, stable release state, and event triggers.
 
@@ -7,8 +7,8 @@ Preflight checks that determine if the release process should proceed by validat
 ### Job Snippet
 
 ```yaml
-preflight:
-  uses: ApiTreeCZ/github-actions/.github/workflows/preflight.yml@v0.6.5
+release-preflight:
+  uses: ApiTreeCZ/github-actions/.github/workflows/release-preflight.yml@v0.6.5
 ```
 
 ### Workflow Example
@@ -17,12 +17,12 @@ Here is how you call this reusable workflow and use its outputs to conditionally
 
 ```yaml
 jobs:
-  preflight:
-    uses: ApiTreeCZ/github-actions/.github/workflows/preflight.yml@v0.6.5
+  release-preflight:
+    uses: ApiTreeCZ/github-actions/.github/workflows/release-preflight.yml@v0.6.5
 
   release:
-    needs: preflight
-    if: ${{ needs.preflight.outputs.should-release == 'true' }}
+    needs: release-preflight
+    if: ${{ needs.release-preflight.outputs.should-release == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

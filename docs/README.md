@@ -33,10 +33,10 @@ These custom composite actions can be used as steps within your workflow jobs.
 
 These reusable workflows can be called directly as jobs.
 
-| Workflow                              | Description                                                                                                                                                  |
-| :------------------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [copilot](./workflows/copilot.md)     | Automatically approves Renovate bot dependency update pull requests using GitHub Copilot after CI checks pass.                                               |
-| [preflight](./workflows/preflight.md) | Preflight checks that determine if the release process should proceed by validating Changesets, release PR status, stable release state, and event triggers. |
+| Workflow                                            | Description                                                                                                                                                  |
+| :-------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [copilot-renovate](workflows/copilot-renovate.md)   | Automatically approves Renovate bot dependency update pull requests using GitHub Copilot after CI checks pass.                                               |
+| [release-preflight](workflows/release-preflight.md) | Preflight checks that determine if the release process should proceed by validating Changesets, release PR status, stable release state, and event triggers. |
 
 ---
 

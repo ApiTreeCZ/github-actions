@@ -39,7 +39,7 @@ runs:
         GIT_PAGER: cat
       # `args` is interpolated on purpose: it carries CLI flags that the shell has
       # to word-split and unquote before Copilot sees them.
-      run: pnpm dlx @github/copilot -p "$COPILOT_PROMPT" ${{ inputs.args }} --no-ask-user
+      run: pnpm dlx @github/copilot@1 -p "$COPILOT_PROMPT" ${{ inputs.args }} --no-ask-user
       shell: bash
 
     - name: Process Copilot output
