@@ -20,7 +20,7 @@
     "@apitree.cz/vitest-config": "1.0.4",
     "@commitlint/cli": "21.2.2",
     "@commitlint/config-conventional": "21.2.2",
-    "@types/node": "24.13.3",
+    "@types/node": "24.13.4",
     "eslint": "9.39.5",
     "husky": "9.1.7",
     "husky-check-email": "0.0.8",
