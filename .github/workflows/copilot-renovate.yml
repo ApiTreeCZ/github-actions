@@ -20,6 +20,7 @@ env:
 jobs:
   wait-for-checks:
     runs-on: ubuntu-latest
+    if: ${{ github.actor == 'renovate[bot]' }}
     permissions:
       checks: read
     steps:
