@@ -25,7 +25,7 @@ Each action is placed in its own folder under `.github/actions/` (e.g., `.github
 This repository includes custom agent instructions/skills in `.agents/`:
 
 - **[create-action](./.agents/skills/create-action/SKILL.md)**: Use this skill when asked to create/scaffold a new reusable GitHub Action. It walks you through metadata collection, folder creation, and template validation.
-- **[release](./.agents/skills/release/SKILL.md)**: Use this skill when asked to release a new version of the repository. It bumps the version in `package.json` and READMEs, commits, tags, and pushes to remote.
+- **[release](./.agents/skills/release/SKILL.md)**: Use this skill when asked to release a new version of the repository. It bumps the version in `package.json` and READMEs on a `release/vX.Y.Z` branch, opens a PR to `main`, and tags the merged commit once you have merged it.
 
 ## Development Workflows
 
