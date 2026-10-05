@@ -1,0 +1,68 @@
+name: Release
+
+# A release is a `chore(release): vX.Y.Z` commit landing on main (the release skill's rebase-merged PR). Consumers
+# pin `uses: ApiTreeCZ/github-actions/...@vX.Y.Z`, so the tag is the release and this workflow creates it on that
+# commit. A release this workflow missed is recovered by pushing the tag onto its release commit by hand.
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          clean: true
+          fetch-depth: 0
+          ref: ${{ github.sha }}
+
+      - name: Tag release commit
+        env:
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.sha }}
+        # language=bash
+        run: |
+          # SemVer with optional channel suffix (e.g., v1.2.3 or v1.2.3-beta, v1.2.3-rc.1)
+          TAG_REGEX='^v[0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9]+(\.[0-9]+)?)?$'
+          RANGE="${BEFORE}..${AFTER}"
+
+          FOUND=()
+          while read -r SHA SUBJECT; do
+            [[ ${SUBJECT} =~ ^chore\(release\):\ (v[^ ]+)$ ]] || continue
+            FOUND+=("${SHA} ${BASH_REMATCH[1]}")
+          done < <(git log --format='%H %s' "${RANGE}")
+
+          if [[ ${#FOUND[@]} -eq 0 ]]; then
+            echo "No release commit in ${RANGE}, nothing to release."
+            exit 0
+          fi
+          if [[ ${#FOUND[@]} -gt 1 ]]; then
+            echo "::error::More than one release commit found: ${FOUND[*]}"
+            exit 1
+          fi
+
+          read -r SHA TAG <<<"${FOUND[0]}"
+          if [[ ! ${TAG} =~ ${TAG_REGEX} ]]; then
+            echo "::error::Release ${TAG} does not match the required tag format (e.g., v1.2.3 or v1.2.3-beta, v1.2.3-rc.1)"
+            exit 1
+          fi
+          # An existing tag on the same commit is a re-run; anywhere else it is a conflict.
+          if EXISTING=$(git rev-parse -q --verify "refs/tags/${TAG}^{commit}"); then
+            if [[ ${EXISTING} != "${SHA}" ]]; then
+              echo "::error::Tag ${TAG} already exists on ${EXISTING}, not on the release commit ${SHA}"
+              exit 1
+            fi
+            echo "${TAG} already tags ${SHA}, nothing to do."
+            exit 0
+          fi
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git tag -a "${TAG}" "${SHA}" -m "Release ${TAG}"
+          git push origin "refs/tags/${TAG}"
+          echo "Tagged ${SHA} as ${TAG}"
