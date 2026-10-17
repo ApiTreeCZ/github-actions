@@ -1,2 +1,2 @@
-pnpm husky-check-email @apitree.cz
+pnpm husky-check-email @apitree.cz,@users.noreply.github.com
 pnpm lint-staged
