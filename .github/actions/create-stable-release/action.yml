@@ -19,7 +19,7 @@ inputs:
   changeset-bin:
     description: 'The command to run the Changesets CLI'
     required: false
-    default: 'pnpx @changesets/cli@2.31.1'
+    default: 'pnpx @changesets/cli@3.0.3'
 
   publish-packages:
     description: 'Whether to publish packages to the registry'
@@ -66,5 +66,5 @@ runs:
             echo "Skipping publish as \"publish-packages\" is set to \"false\""
         fi
 
-        ${{ inputs.changeset-bin }} tag
+        ${{ inputs.changeset-bin }} git-tag
         git push --follow-tags

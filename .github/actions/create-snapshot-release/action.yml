@@ -19,7 +19,7 @@ inputs:
   changeset-bin:
     description: 'The command to run the Changesets CLI'
     required: false
-    default: 'pnpx @changesets/cli@2.31.1'
+    default: 'pnpx @changesets/cli@3.0.3'
 
   publish-packages:
     description: 'Whether to publish packages to the registry'
@@ -95,10 +95,10 @@ runs:
 
             echo "$OUTPUT"
 
-            # Extract published packages by matching "info Publishing" lines
-            # Strip ANSI color codes first, then extract package names
-            # These lines look like: 🦋  info Publishing "@scope/package" at "version"
-            PACKAGES=$(echo "$OUTPUT" | sed 's/\x1b\[[0-9;]*m//g' | { grep 'info Publishing' || true; } | sed -E 's/.*"([^"]+)" at "([^"]+)".*/\1@\2/')
+            # Extract published packages from the "Successfully published:" block
+            # Strip ANSI escape codes first, then collect the `name@version` lines that follow the header
+            # The block looks like: ◇  Successfully published:\n@scope/package@version\n...
+            PACKAGES=$(echo "$OUTPUT" | sed 's/\x1b\[[0-9;?]*[A-Za-z]//g' | awk '/Successfully published:/ { found = 1; next } found && /^[^[:space:]]+@[^[:space:]]+$/ { print; next } { found = 0 }')
 
             # Only set output if packages were found
             if [ -n "$PACKAGES" ]; then
