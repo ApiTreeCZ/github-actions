@@ -18,6 +18,7 @@ Set up Git CLI for a bot user with a short-lived token via ApiTree GitHub Action
     # op-private-key-secret: 'apitree-infra/github-actions/private-key.pem'
     # permission-contents: 'write'
     # permission-pull-requests: 'write'
+    # permission-workflows: 'write'
 ```
 
 ### Job Example
@@ -50,13 +51,14 @@ jobs:
 
 ## 📥 Inputs
 
-| Input                      | Description                                                                                            | Required |                     Default                      |
-| :------------------------- | :----------------------------------------------------------------------------------------------------- | :------: | :----------------------------------------------: |
-| `op-service-account-token` | 1Password service account token with access to the vault containing ApiTree GitHub Actions app secrets | **Yes**  |                        -                         |
-| `op-client-id-secret`      | 1Password secret path for the ApiTree GitHub Actions app client ID                                     |    No    |    `'apitree-infra/github-actions/CLIENT_ID'`    |
-| `op-private-key-secret`    | 1Password secret path for the ApiTree GitHub Actions app private key                                   |    No    | `'apitree-infra/github-actions/private-key.pem'` |
-| `permission-contents`      | The permission level for contents (repository) scope of the token (`read` or `write`)                  |    No    |                    `'write'`                     |
-| `permission-pull-requests` | The permission level for pull requests (repository) scope of the token (`read` or `write`)             |    No    |                    `'write'`                     |
+| Input                      | Description                                                                                               | Required |                     Default                      |
+| :------------------------- | :-------------------------------------------------------------------------------------------------------- | :------: | :----------------------------------------------: |
+| `op-service-account-token` | 1Password service account token with access to the vault containing ApiTree GitHub Actions app secrets    | **Yes**  |                        -                         |
+| `op-client-id-secret`      | 1Password secret path for the ApiTree GitHub Actions app client ID                                        |    No    |    `'apitree-infra/github-actions/CLIENT_ID'`    |
+| `op-private-key-secret`    | 1Password secret path for the ApiTree GitHub Actions app private key                                      |    No    | `'apitree-infra/github-actions/private-key.pem'` |
+| `permission-contents`      | The permission level for contents (repository) scope of the token (`read` or `write`)                     |    No    |                    `'write'`                     |
+| `permission-pull-requests` | The permission level for pull requests (repository) scope of the token (`read` or `write`)                |    No    |                    `'write'`                     |
+| `permission-workflows`     | The permission level for workflows scope of the token (`write`), needed to push changes to workflow files |    No    |                        -                         |
 
 ## 📤 Outputs
 

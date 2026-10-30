@@ -10,6 +10,7 @@ These custom composite actions can be used as steps within your workflow jobs.
 
 | Action                                                                  | Description                                                             |
 | :---------------------------------------------------------------------- | :---------------------------------------------------------------------- |
+| [bump-version](./actions/bump-version.md)                               | Bumps the version and every version reference a release config lists.   |
 | [check-changesets-status](./actions/check-changesets-status.md)         | Checks presence of Changesets on a PR and reports the status.           |
 | [copilot](./actions/copilot.md)                                         | Runs @github/copilot CLI programmatically and processes the output.     |
 | [check-release-pr](./actions/check-release-pr.md)                       | Checks whether the workflow was triggered by a release PR.              |

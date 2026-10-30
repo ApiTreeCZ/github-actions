@@ -4,7 +4,7 @@ This repository contains reusable GitHub Actions and Workflows for ApiTree proje
 
 ## Repository Tech Stack
 
-- **Node.js**: `v24` (strict engine)
+- **Node.js**: `v26` (strict engine)
 - **Package Manager**: `pnpm` `v10`
 - **Linting & Formatting**: ESlint (`eslint.config.js`) and Prettier (`prettier.config.js`)
 
@@ -13,7 +13,8 @@ This repository contains reusable GitHub Actions and Workflows for ApiTree proje
 Each action is placed in its own folder under `.github/actions/` (e.g., `.github/actions/[name]/`).
 
 - `.github/actions/[name]/`: Folders containing composite GitHub Actions (each with an `action.yml`).
-- `.github/workflows/`: Reusable workflows and repository CI workflows (like `release-preflight.yml`, `ci.yml` and `release.yml`, which tags a merged `chore(release): vX.Y.Z` commit).
+- `.github/workflows/`: Reusable workflows and repository CI workflows (like `release-preflight.yml`, `ci.yml` and `release.yml`, which opens the release PR when started manually and tags a merged `chore(release): vX.Y.Z` commit on push to `main`).
+- `release.config.js`: This repository's config for the [bump-version](./docs/actions/bump-version.md) action (`pnpm run release:bump <major|minor|patch|X.Y.Z>` locally, `release.yml` in CI): files and patterns the release bumps besides `package.json`; add a target here to bump a new reference.
 - `docs/actions/[name].md`: Individual documentation files for each action.
 - `docs/workflows/[name].md`: Individual documentation files for each reusable workflow.
 - `docs/README.md`: Entry point documenting and linking all actions and workflows.
@@ -25,7 +26,7 @@ Each action is placed in its own folder under `.github/actions/` (e.g., `.github
 This repository includes custom agent instructions/skills in `.agents/`:
 
 - **[create-action](./.agents/skills/create-action/SKILL.md)**: Use this skill when asked to create/scaffold a new reusable GitHub Action. It walks you through metadata collection, folder creation, and template validation.
-- **[release](./.agents/skills/release/SKILL.md)**: Use this skill when asked to release a new version of the repository. It bumps the version in `package.json` and READMEs on a `release/vX.Y.Z` branch and opens a PR to `main`; once you merge it, `.github/workflows/release.yml` tags the merged release commit.
+- **[release](./.agents/skills/release/SKILL.md)**: Use this skill when asked to release a new version of the repository. It bumps the version with the `bump-version` action script on a `release/vX.Y.Z` branch and opens a PR to `main`; once you merge it, `.github/workflows/release.yml` tags the merged release commit. Starting `release.yml` manually does the same without an agent.
 
 ## Development Workflows
 

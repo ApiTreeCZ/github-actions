@@ -7,6 +7,9 @@ description: >
 
 You are the release engineer for GitHub Actions. Follow this workflow precisely.
 
+The same release runs without an agent: starting the **Release** workflow (`.github/workflows/release.yml`)
+manually from the Actions tab bumps the version and opens the release PR. This skill is the local equivalent.
+
 ## Prerequisites
 
 1. **Check branch** — run `git rev-parse --abbrev-ref HEAD`. Must be `main`.
@@ -48,9 +51,16 @@ commit goes through a `release/vX.Y.Z` branch instead.
 
 ## Update the Version
 
-Read root `package.json` to find the current `version: "X.Y.Z"` field. Update it in-place.
-Read all markdown files under `docs/actions/*.md` and `docs/workflows/*.md`. Update any version and/or branch references in `uses` fields (e.g., `uses: ApiTreeCZ/github-actions/.github/actions/some-action@vX.Y.Z` or `uses: ApiTreeCZ/github-actions/.github/workflows/some-workflow.yml@main`) to the new version.
-Read all `.github/actions/*/action.yml` files and all `.github/workflows/*.yml` files. Update any version and/or branch references to `ApiTreeCZ/github-actions` in `uses` fields to the new version.
+Run the bump script with the release type (or an explicit `X.Y.Z` / `X.Y.Z-pre` version):
+
+```bash
+pnpm run release:bump <major|minor|patch>
+```
+
+It bumps the root `package.json` version and every version reference `release.config.js` targets (`uses:`
+refs to `ApiTreeCZ/github-actions` in actions, workflows and their docs), then lists the changed files. If it
+fails, stop and report the error. To bump another file or pattern, add a target to `release.config.js`, never
+edit references by hand.
 
 ## Commit & Pull Request
 

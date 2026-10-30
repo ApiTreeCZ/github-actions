@@ -26,6 +26,10 @@ inputs:
     default: 'write'
     required: false
 
+  permission-workflows:
+    description: 'The permission level for workflows scope of the token (write), needed to push changes to workflow files'
+    required: false
+
 outputs:
   token:
     description: 'The generated GitHub App token for authentication with GitHub API and Git operations'
@@ -65,6 +69,7 @@ runs:
         private-key: ${{ steps.parse-secrets.outputs.PRIVATE_KEY }}
         permission-contents: ${{ inputs.permission-contents }}
         permission-pull-requests: ${{ inputs.permission-pull-requests }}
+        permission-workflows: ${{ inputs.permission-workflows }}
 
     - name: Get GitHub App user ID
       id: get-user-id
