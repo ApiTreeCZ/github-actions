@@ -11,6 +11,7 @@
     "postinstall": "pnpx is-ci || husky",
     "lint": "eslint --cache .",
     "lint:fix": "pnpm run lint --fix",
+    "release:bump": "node .github/actions/bump-version/index.js",
     "test": "vitest run"
   },
   "devDependencies": {
