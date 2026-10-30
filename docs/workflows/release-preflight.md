@@ -33,7 +33,20 @@ jobs:
 
 ## 📥 Inputs
 
-This workflow does not accept any inputs.
+| Input                     | Description                                                                                         | Required | Default |
+| :------------------------ | :-------------------------------------------------------------------------------------------------- | :------: | :-----: |
+| `dispatch-stable-release` | Treat a `workflow_dispatch` on `main` as a stable release (recovers a release whose push never ran) |    No    | `false` |
+
+When the push of a merged release PR starts no workflow (a dropped GitHub event), run the calling workflow by hand on
+`main` and pass `true` from a `workflow_dispatch` input. The stable release only publishes versions missing from the
+registry and creates missing tags, so a repeated run changes nothing:
+
+```yaml
+release-preflight:
+  uses: ApiTreeCZ/github-actions/.github/workflows/release-preflight.yml@v0.8.1
+  with:
+    dispatch-stable-release: ${{ inputs.stable-release || false }}
+```
 
 ## 🔑 Secrets
 

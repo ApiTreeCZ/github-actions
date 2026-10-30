@@ -2,6 +2,13 @@ name: Release Preflight
 
 on:
   workflow_call:
+    inputs:
+      dispatch-stable-release:
+        description: Treat a workflow_dispatch on main as a stable release (recovers a release whose push never ran)
+        type: boolean
+        default: false
+        required: false
+
     outputs:
       has-changesets:
         description: Indicates whether there are any unreleased Changesets
@@ -42,6 +49,8 @@ jobs:
       - name: Check stable release
         id: check-stable-release
         uses: ApiTreeCZ/github-actions/.github/actions/check-stable-release@v0.8.1
+        with:
+          dispatch-stable-release: ${{ inputs.dispatch-stable-release }}
 
       - name: Check release PR
         id: check-release-pr
