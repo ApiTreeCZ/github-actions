@@ -1,16 +1,86 @@
 name: Release
 
-# A release is a `chore(release): vX.Y.Z` commit landing on main (the release skill's rebase-merged PR). Consumers
-# pin `uses: ApiTreeCZ/github-actions/...@vX.Y.Z`, so the tag is the release and this workflow creates it on that
-# commit. A release this workflow missed is recovered by pushing the tag onto its release commit by hand.
+# One workflow, two jobs picked by the trigger:
+# - `workflow_dispatch` (started manually on main) runs `pr`: the bump-version action bumps every version reference
+#   `release.config.js` targets on a `release/vX.Y.Z` branch and opens the `chore(release): vX.Y.Z` PR.
+# - `push` to main runs `tag`: a release is a `chore(release): vX.Y.Z` commit landing on main (the rebase-merged PR
+#   from the `pr` job or the release skill). Consumers pin `uses: ApiTreeCZ/github-actions/...@vX.Y.Z`, so the tag is
+#   the release and this job creates it on that commit. A release it missed is recovered by pushing the tag onto its
+#   release commit by hand.
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
+    inputs:
+      release:
+        description: 'Release type'
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+        default: patch
+      version:
+        description: 'Explicit version (X.Y.Z or X.Y.Z-pre), overrides the release type'
+        type: string
+        required: false
 
 jobs:
+  pr:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' }}
+    # Job-level on purpose: a workflow-level group would also queue `tag` runs, and GitHub drops older pending runs
+    # of a group, which would leave their release commits untagged.
+    concurrency:
+      group: ${{ github.workflow }}-pr
+      cancel-in-progress: false
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          # The push must use the app token from setup-git: the default GITHUB_TOKEN cannot update workflow files,
+          # and PRs it opens do not trigger the required CI checks.
+          persist-credentials: false
+
+      - name: Set up Git
+        id: setup-git
+        uses: ./.github/actions/setup-git
+        with:
+          op-service-account-token: ${{ secrets.OP_APITREE_INFRA_SERVICE_ACCOUNT_TOKEN }}
+          permission-workflows: 'write'
+
+      - name: Bump version
+        id: bump-version
+        uses: ./.github/actions/bump-version
+        with:
+          release: ${{ inputs.version || inputs.release }}
+
+      - name: Open release PR
+        env:
+          GH_TOKEN: ${{ steps.setup-git.outputs.token }}
+          TAG: v${{ steps.bump-version.outputs.version }}
+        # language=bash
+        run: |
+          BRANCH="release/${TAG}"
+          EXISTING=$(git ls-remote origin "refs/tags/${TAG}" "refs/heads/${BRANCH}")
+          if [[ -n ${EXISTING} ]]; then
+            echo "::error::${TAG} is taken: ${EXISTING}"
+            exit 1
+          fi
+
+          git switch -c "${BRANCH}"
+          git commit -am "chore(release): ${TAG}"
+          git push -u origin "${BRANCH}"
+          PR_URL=$(gh pr create --base main --head "${BRANCH}" --title "chore(release): ${TAG}" \
+            --body "Release ${TAG}. Rebase-merging tags the merged release commit.")
+          echo "Opened ${PR_URL}" >> "${GITHUB_STEP_SUMMARY}"
+
   tag:
     runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'push' }}
     permissions:
       contents: write
     steps:

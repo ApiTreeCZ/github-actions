@@ -1,0 +1,26 @@
+name: Bump version
+description: Bumps the project version and every version reference listed in a release config file
+
+inputs:
+  release:
+    description: 'Release type (major, minor, patch) or an explicit version (X.Y.Z or X.Y.Z-pre)'
+    required: true
+
+  config:
+    description: 'Path to the release config file (ES module); its directory is the base for the paths it lists'
+    default: 'release.config.js'
+    required: false
+
+outputs:
+  version:
+    description: 'The new version (X.Y.Z)'
+
+  previous-version:
+    description: 'The version before the bump (X.Y.Z)'
+
+  files:
+    description: 'Newline-separated list of changed files, relative to the config directory'
+
+runs:
+  using: 'node24'
+  main: 'index.js'
