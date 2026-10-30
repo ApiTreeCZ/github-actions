@@ -13,6 +13,7 @@ Checks whether the triggering workflow is a stable release.
     # Optional inputs (uncomment if needed)
     # commit-message: 'chore(main): release'
     # commit-author: 'apitree-github-actions[bot]'
+    # dispatch-stable-release: 'false'
 ```
 
 ### Job Example
@@ -33,10 +34,11 @@ jobs:
 
 ## 📥 Inputs
 
-| Input            | Description                                            | Required |             Default             |
-| :--------------- | :----------------------------------------------------- | :------: | :-----------------------------: |
-| `commit-message` | Exact release commit message used for detection        |    No    |    `'chore(main): release'`     |
-| `commit-author`  | Exact username of the commit author used for detection |    No    | `'apitree-github-actions[bot]'` |
+| Input                     | Description                                                                                         | Required |             Default             |
+| :------------------------ | :-------------------------------------------------------------------------------------------------- | :------: | :-----------------------------: |
+| `commit-message`          | Exact release commit message used for detection                                                     |    No    |    `'chore(main): release'`     |
+| `commit-author`           | Exact username of the commit author used for detection                                              |    No    | `'apitree-github-actions[bot]'` |
+| `dispatch-stable-release` | Treat a `workflow_dispatch` on `main` as a stable release (recovers a release whose push never ran) |    No    |            `'false'`            |
 
 ## 📤 Outputs
 
