@@ -8,7 +8,7 @@ Run Turbo task with controlled concurrency and no telemetry.
 
 ```yaml
 - name: Build with Turbo
-  uses: ApiTreeCZ/github-actions/.github/actions/turbo-run@v0.8.0
+  uses: ApiTreeCZ/github-actions/.github/actions/turbo-run@v0.8.1
   with:
     # Required inputs
     task: 'build'
@@ -31,7 +31,7 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Build with Turbo
-        uses: ApiTreeCZ/github-actions/.github/actions/turbo-run@v0.8.0
+        uses: ApiTreeCZ/github-actions/.github/actions/turbo-run@v0.8.1
         with:
           task: 'build'
           concurrency: '5'
