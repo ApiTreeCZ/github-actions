@@ -40,7 +40,7 @@ describe('collect-release-info-action', () => {
     virtualFiles = {};
 
     vi.mocked(execSync).mockImplementation((cmd) => {
-      if (cmd === 'git diff --name-only HEAD') {
+      if (cmd === 'git diff --name-only HEAD && git ls-files --others --exclude-standard') {
         return mockGitDiffOutput;
       }
       throw new Error(`Unexpected command: ${cmd}`);
@@ -80,7 +80,7 @@ describe('collect-release-info-action', () => {
     expect(exitSpy).not.toHaveBeenCalled();
   });
 
-  it('should handle git diff execution errors gracefully', async () => {
+  it('should handle git execution errors gracefully', async () => {
     process.env.GITHUB_OUTPUT = 'mock-output-file.txt';
     vi.mocked(execSync).mockImplementation(() => {
       throw new Error('git command failed');

@@ -4,7 +4,7 @@
  * Extracts release changes from CHANGELOG.md files for the release PR body.
  *
  * This script:
- * - Finds all modified CHANGELOG.md files
+ * - Finds all modified or new CHANGELOG.md files
  * - Extracts the latest version entry from each
  * - Filters out private packages
  * - Groups changes by bump type (major/minor/patch)
@@ -17,11 +17,14 @@ import { appendFile, readFile } from 'node:fs/promises';
 import { join, dirname } from 'node:path';
 
 /**
- * Get list of modified CHANGELOG.md files from git diff
+ * Get list of modified or new CHANGELOG.md files. `git diff` alone misses a package's first CHANGELOG.md, which
+ * `changeset version` creates untracked; `ls-files --others` adds it.
  */
 function getModifiedChangelogs() {
   try {
-    const output = execSync('git diff --name-only HEAD', { encoding: 'utf-8' });
+    const output = execSync('git diff --name-only HEAD && git ls-files --others --exclude-standard', {
+      encoding: 'utf-8',
+    });
     return output
       .split('\n')
       .filter((line) => line.trim())
