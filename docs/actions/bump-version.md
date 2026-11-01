@@ -13,7 +13,7 @@ before anything is written, so a stale config never silently skips a reference.
 ```yaml
 - name: Bump version
   id: bump-version
-  uses: ApiTreeCZ/github-actions/.github/actions/bump-version@v0.8.1
+  uses: ApiTreeCZ/github-actions/.github/actions/bump-version@v0.8.2
   with:
     # Required inputs
     release: 'patch'
@@ -40,14 +40,14 @@ jobs:
 
       - name: Set up Git
         id: setup-git
-        uses: ApiTreeCZ/github-actions/.github/actions/setup-git@v0.8.1
+        uses: ApiTreeCZ/github-actions/.github/actions/setup-git@v0.8.2
         with:
           op-service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
           permission-workflows: 'write' # Only when the config targets workflow files
 
       - name: Bump version
         id: bump-version
-        uses: ApiTreeCZ/github-actions/.github/actions/bump-version@v0.8.1
+        uses: ApiTreeCZ/github-actions/.github/actions/bump-version@v0.8.2
         with:
           release: ${{ inputs.release }}
 
