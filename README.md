@@ -16,7 +16,7 @@
 
 ### Prerequisites
 
-- node.js `v24`
+- node.js `v26`
 - pnpm `v12`
 
 ### Installation
