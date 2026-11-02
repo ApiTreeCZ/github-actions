@@ -10,7 +10,7 @@ inputs:
   changeset-bin:
     description: 'The command to run the Changesets CLI'
     required: false
-    default: 'pnpx @changesets/cli@3.0.3'
+    default: 'pnpx @changesets/cli@3'
 
   origin-ref:
     description: 'The Git ref to compare the Changesets status against'
